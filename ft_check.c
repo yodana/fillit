@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 06:14:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/16 18:27:40 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/02/16 20:16:30 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,17 @@ void	ft_error()
 	exit(0);
 }
 
-void	ft_check_block(int i, int j, char **map)
+int		ft_check_block(int i, int j, char **map)
 {
-	
+	if (j < 3 && map[i][j + 1] == '#')
+		return (1);
+	else if (j > 0 && map[i][j - 1] == '#')
+		return (1);
+	else if (i < 3 && map[i + 1][j] == '#')
+		return (1);
+	else if (i > 0 && map[i - 1][j] == '#')
+		return (1);
+	return (0);
 }
 
 int			ft_end_block(int i)
@@ -47,6 +55,8 @@ void		ft_check_line(char **map)
 				ft_error();
 			if (map[i][j] == '#')
 			{
+				if (!ft_check_block(i, j, map))
+					ft_error();
 				blocks++;
 			}
 			j++;
@@ -61,6 +71,11 @@ void		ft_check_line(char **map)
 		}
 		else if (ft_end_block(i))
 			blocks = 0;
+		if (blocks > 0 && blocks != 4)
+		{
+			if (!ft_strchr(map[i], '#'))
+				ft_error();
+		}
 	}
 	printf("%d",i);
 	if (i % 4 != 0 && i % 9 != 0)
