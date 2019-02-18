@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/16 16:11:34 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/18 19:43:15 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ int main(int argc, char **argv)
 	int i = 0;
 	int size = 1;
 	fd = open(argv[1], O_RDONLY);
+	t_tetris *piece;
+
+	if (argc !=	 2)
+	{
+		ft_putendl("usage: ./fillit tetris_file");
+		return (0);
+	}
+	piece = ft_new_tetris();
 	while (get_next_line(fd, &line))
 	{
 //		map = ft_realloc(map, size);
@@ -43,33 +51,21 @@ int main(int argc, char **argv)
 	}
 	map[i] = NULL;
 	i = 0;
-	while(map[i])
-	{
-		printf("%s",map[i]);
-		i++;
-	}
+	int j = 0;
 	ft_check_line(map);
-	/*
- *	while (map[i] != NULL)
+	while(map[i] != NULL)
 	{
-		ft_putnbr(ft_strlen(map[i]));
-		ft_putchar('\n');
-		ft_putendl(map[i]);
-		if (ft_strlen(map[i]) != 4)
-		{
-			ft_error();
-		}
-		i++;
-	}*/
-	//while (map[i] != '\0')
-	//{
-	//	ft_putendl(map[i]);
-	//	i++;
-	//}
-	if (argc != 2)
-	{
-		ft_putendl("usage : fillit tetris_file");
-		return (0);
+			if ((i + 1) % 5 == 0)
+			{
+				piece->next = ft_new_tetris();
+				piece = piece->next;
+				j = 0;
+			}
+			((char**)piece->map)[j] = ft_strdup(map[i]);
+			printf("i = %d map = %s | piece = %s\n",i,map[i],(((char**)piece->map)[j]));
+			j++;
+			i++;
 	}
+	ft_resolv(&piece, 0, 0);
 	return (0);
 }

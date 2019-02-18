@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_resolv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 13:08:22 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/18 18:29:43 by yodana           ###   ########.fr       */
+/*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
+/*   Updated: 2019/02/18 19:43:13 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_resolv(t_tetris **piece, int x, int y)
 {
-	char	*dest;
-	int		i;
-
-	i = 0;
-	if (!(dest = (char*)malloc(sizeof(*s1) * ft_strlen(s1) + 1)))
-		return (NULL);
-	while (s1[i])
+	while (piece->next)
 	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
+		while(x < 4 && y < 4)
+		{
+			while (y < final_map->xmax)
+			{
+				while (y < 4)
+				{
+					if(piece->map[x][y] == "#")
+						map[x][y] == "#";
+					ft_resolv(piece, x+ 1, y);
+				}
+				ft_resolv(piece,0,y+1);
+			}
+
+		}

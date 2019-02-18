@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 06:14:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/16 17:04:40 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/18 18:17:15 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,15 @@ void		ft_check_line(char **map)
 		i++;
 		if (ft_end_block(i) && (blocks != 4))
 		{
+			printf("lol");
 			ft_error();
 		}
 		else if (ft_end_block(i))
 			blocks = 0;
 	}
-	printf("%d",i);
-	if (i % 4 != 0 && i % 9 != 0)
+	if ((i + 1) % 5 != 0)
 	{
+		printf("%d",i);
 		ft_error();
 	}
 }

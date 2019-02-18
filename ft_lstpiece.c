@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstpiece.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 17:18:04 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/18 15:06:00 by yodana           ###   ########.fr       */
+/*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
+/*   Updated: 2019/02/18 18:34:01 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_tetris	*ft_new_tetris()
 {
-	t_list *new;
+	t_tetris *new;
 
-	if (!(new = malloc(sizeof(t_list))))
-		return (NULL);
+	new = malloc(sizeof(t_tetris));
 	new->next = NULL;
-	if (content == NULL)
-	{
-		new->content = NULL;
-		new->content_size = 0;
-		return (new);
-	}
-	if (!(new->content = malloc(sizeof(content) * content_size)))
-		return (NULL);
-	ft_memcpy(new->content, content, content_size);
-	new->content_size = content_size;
+	new->map = (char**)malloc(sizeof(char) * 1);
 	return (new);
 }
