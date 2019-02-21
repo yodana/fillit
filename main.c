@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/19 18:15:15 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:32:52 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int main(int argc, char **argv)
 			{
 				piece->next = ft_new_tetris();
 				piece = piece->next;
+				i++;
 				j = 0;
 			}
 			((char**)piece->map)[j] = ft_strdup(map[i]);
@@ -67,6 +68,7 @@ int main(int argc, char **argv)
 			j++;
 			i++;
 	}
-	ft_resolv(final_map, piece, 0, 0);
+	ft_resolv(final_map, &piece, 0, 0);
+	
 	return (0);
 }

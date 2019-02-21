@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 15:26:16 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/19 18:22:55 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:20:17 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_final_map
 	int y;
 	struct s_final_map *next;
 }				t_final_map;
-
+void		ft_resolv(t_final_map *final_map, t_tetris **piece, int x, int y);
 t_tetris	*ft_new_tetris();
 t_final_map *ft_new_map();
 

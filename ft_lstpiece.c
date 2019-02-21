@@ -6,22 +6,42 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/19 18:15:26 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:04:34 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-
+#include <stdio.h>
 t_final_map	*ft_new_map()
 {
 	t_final_map *new;
+	char **map;
+	int x;
+	int y;
 
+	x = 0;
+	y = 0;
+	map = (char**)malloc(sizeof(char) * 33);
+	map[x] = ft_strnew(0);
+	while (x < 4)
+	{
+		while (y < 4)
+		{
+			map[x][y] = '.';
+			y++;
+		}
+		map[x][y] = '\0';
+		y = 0;
+		x++;
+		map[x] = ft_strnew(4);
+	}
+	map[x] = NULL;
 	new = malloc(sizeof(t_final_map));
 	new->next = NULL;
-	new->x_max = 4;
-	new->y_max = 4;
-	new->sol = (char**)malloc(sizeof(char) * 1);
+	new->x = 4;
+	new->y = 4;
+	new->sol = map;
 	return (new);
 }
 
@@ -31,6 +51,6 @@ t_tetris	*ft_new_tetris()
 
 	new = malloc(sizeof(t_tetris));
 	new->next = NULL;
-	new->map = (char**)malloc(sizeof(char) * 1);
+	new->map = (char**)malloc(sizeof(char) * 33);
 	return (new);
 }
