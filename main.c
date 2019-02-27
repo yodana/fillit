@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/16 16:11:34 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/26 22:09:11 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 		printf("%s",map[i]);
 		i++;
 	}
-	ft_check_line(map);
+	ft_check_line(map, 0, 0);
 	/*
  *	while (map[i] != NULL)
 	{
