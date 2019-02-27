@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/26 23:30:09 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/27 18:29:29 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 	map[i] = NULL;
 	i = 0;
 	int j = 0;
-	ft_check_line(map);
+	ft_check_line(map, 0, 0);
 	while(map[i] != NULL)
 	{
 			if ((i + 1) % 5 == 0)
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 			j++;
 			i++;
 	}
- i = 0;
+	i = 0;
 	/*while (piece)
 	{
 		ft_putstr("lol");
