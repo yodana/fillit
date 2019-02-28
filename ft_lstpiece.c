@@ -6,14 +6,14 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/26 15:00:46 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/28 22:42:15 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 #include <stdio.h>
-t_final_map	*ft_new_map()
+t_final_map	*ft_new_map(int new_x, int new_y)
 {
 	t_final_map *new;
 	char **map;
@@ -24,9 +24,9 @@ t_final_map	*ft_new_map()
 	y = 0;
 	map = (char**)malloc(sizeof(char) * 33);
 	map[x] = ft_strnew(0);
-	while (x < 4)
+	while (x < new_x)
 	{
-		while (y < 4)
+		while (y < new_y)
 		{
 			map[x][y] = '.';
 			y++;
@@ -39,8 +39,8 @@ t_final_map	*ft_new_map()
 	map[x] = NULL;
 	new = malloc(sizeof(t_final_map));
 	new->next = NULL;
-	new->x = 4;
-	new->y = 4;
+	new->x = new_x;
+	new->y = new_y;
 	new->sol = map;
 	return (new);
 }
@@ -51,6 +51,6 @@ t_tetris	*ft_new_tetris()
 
 	new = malloc(sizeof(t_tetris));
 	new->next = NULL;
-	new->map = (char**)malloc(sizeof(char) * 33);
+	new->map = (char*)malloc(sizeof(char) * 33);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/26 23:30:09 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/28 22:45:55 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int main(int argc, char **argv)
 	int size = 1;
 	fd = open(argv[1], O_RDONLY);
 	t_tetris *piece;
+	char **sol;
+	sol = NULL;
 	t_final_map *final_map;
-	final_map = ft_new_map();
+	final_map = ft_new_map(sol,4,4);
 	if (argc !=	 2)
 	{
 		ft_putendl("usage: ./fillit tetris_file");
@@ -73,11 +75,12 @@ int main(int argc, char **argv)
 				i++;
 				j = 0;
 			}
-			((char**)piece->map)[j] = ft_strdup(map[i]);
-			printf("i = %d map = %s | piece = %s\n",i,map[i],(((char**)piece->map)[j]));
+			piece->map = ft_strjoin(piece->map,map[i]);
+			printf("i = %d map = %s | piece = %s\n",i,map[i],piece->map);
 			j++;
 			i++;
 	}
+	t_tetris *begin = piece;
  i = 0;
 	/*while (piece)
 	{
@@ -91,6 +94,6 @@ int main(int argc, char **argv)
 		piece = piece->next;
 		ft_putchar('\n');
 	}*/
-	ft_resolv(final_map, piece, 0, 0);
+	ft_resolv(final_map, piece, 0, 0,begin);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 15:26:16 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/22 12:07:36 by yodana           ###   ########.fr       */
+/*   Updated: 2019/02/28 22:47:20 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_error();
 void		ft_check_line(char **map);
 typedef struct s_tetris
 {
-	char **map;
+	char *map;
 	struct s_tetris *next;
 }				t_tetris;
 
