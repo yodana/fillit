@@ -6,11 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 15:26:16 by yodana            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/02/28 22:47:20 by yodana           ###   ########.fr       */
-=======
-/*   Updated: 2019/02/27 18:32:28 by arbocqui         ###   ########.fr       */
->>>>>>> 30737489fa939c45fa7f9ea89cecab79c5c0d599
+/*   Updated: 2019/03/05 18:18:17 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +18,7 @@
 
 void	ft_error();
 void	ft_check_line(char **map, int i, int j);
+char	*ft_piece(char *piece);
 typedef struct s_tetris
 {
 	char *map;

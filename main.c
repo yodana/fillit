@@ -6,11 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/02/28 22:45:55 by yodana           ###   ########.fr       */
-=======
-/*   Updated: 2019/02/27 18:29:29 by arbocqui         ###   ########.fr       */
->>>>>>> 30737489fa939c45fa7f9ea89cecab79c5c0d599
+/*   Updated: 2019/03/05 18:51:28 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +68,8 @@ int main(int argc, char **argv)
 	{
 			if ((i + 1) % 5 == 0)
 			{
+				piece->map = ft_piece(piece->map);
+				printf("piece = %s\n",piece->map);
 				ft_putchar('\n');
 				t_tetris *new = ft_new_tetris();
 				ft_lstajout(&piece,new);
@@ -79,29 +77,13 @@ int main(int argc, char **argv)
 				i++;
 				j = 0;
 			}
-			piece->map = ft_strjoin(piece->map,map[i]);
-			printf("i = %d map = %s | piece = %s\n",i,map[i],piece->map);
+			piece->map = ft_strjoin(piece->map, map[i]);
+			//printf("i = %d map = %s | piece = %s\n",i,map[i],piece->map);
 			j++;
 			i++;
 	}
-<<<<<<< HEAD
-	t_tetris *begin = piece;
- i = 0;
-=======
-	i = 0;
->>>>>>> 30737489fa939c45fa7f9ea89cecab79c5c0d599
-	/*while (piece)
-	{
-		ft_putstr("lol");
-		while (((char**)piece->map)[i])
-		{
-			printf("i = %d %s\n",i,((char**)piece->map)[i]);
-			i++;
-		}
-		i = 0;
-		piece = piece->next;
-		ft_putchar('\n');
-	}*/
-	ft_resolv(final_map, piece, 0, 0,begin);
+	piece->map = ft_piece(piece->map);
+	printf("piece = %s\n",piece->map);
+	ft_resolv(final_map,piece, 0, 0);
 	return (0);
 }

@@ -1,6 +1,6 @@
 NAME = fillit
 
-SRC = main.c ft_check.c ft_resolv.c ft_lstpiece.c
+SRC = main.c ft_piece.c ft_check.c ft_resolv.c ft_lstpiece.c
 
 HEADER = fillit.h
 
