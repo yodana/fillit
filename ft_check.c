@@ -6,12 +6,11 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 06:14:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/11 16:38:24 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/11 20:12:10 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 void	ft_error()
 {
