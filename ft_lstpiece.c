@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/01 15:56:31 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/11 19:57:33 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_final_map	*ft_new_map(int new_x, int new_y)
 
 	x = 0;
 	y = 0;
-	map = (char**)malloc(sizeof(char) * 33);
+	map = (char**)malloc(sizeof(char*) * 33);
 	map[x] = ft_strnew(0);
-	while (x < 4)
+	while (x < new_x)
 	{
-		while (y < 4)
+		while (y < new_y)
 		{
 			map[x][y] = '.';
 			y++;

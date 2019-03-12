@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/05 18:51:28 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/11 20:31:45 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int main(int argc, char **argv)
 	char **sol;
 	sol = NULL;
 	t_final_map *final_map;
-	final_map = ft_new_map(sol,4,4);
-	if (argc !=	 2)
+	final_map = ft_new_map(4,4);
+	if (argc != 2)
 	{
 		ft_putendl("usage: ./fillit tetris_file");
 		return (0);
@@ -53,7 +53,6 @@ int main(int argc, char **argv)
 	while (get_next_line(fd, &line))
 	{
 //		map = ft_realloc(map, size);
-		map[i] = ft_strnew(0);
 		map[i] = ft_strdup(line);
 		if (map[i] == NULL)
 			map[i] = ft_strdup("\n");
@@ -84,6 +83,7 @@ int main(int argc, char **argv)
 	}
 	piece->map = ft_piece(piece->map);
 	printf("piece = %s\n",piece->map);
-	ft_resolv(final_map,piece, 0, 0);
+	ft_putchar('\n');
+	ft_resolv(final_map,piece, 0,0);
 	return (0);
 }

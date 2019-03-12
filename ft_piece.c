@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/05 18:35:25 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/11 20:27:02 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_points(char *piece)
 		if (piece[j] == '#')
 		{
 			tab[y] = points;
+			printf("tab = %d || y == %d\n",tab[y], y);
 			points = 0;
 			if (y < 1)
 				y++;
@@ -64,7 +65,6 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 	new[j] = piece[i];
 	while (points > 0)
 	{
-		printf("lol");
 		points--;
 		new[j] = '.';
 		j++;
@@ -72,6 +72,7 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 	new[j] = '\0';
 	return (ft_strrev(new));
 }
+
 char	*ft_piece(char *piece)
 {
 	int points;
@@ -82,6 +83,6 @@ char	*ft_piece(char *piece)
 	points = ft_points(piece);
 	printf("points dans main = %d\n",points);
 	new = ft_new_piece(ft_strrev(piece), points, 0);
-	printf("%s",new);
+	printf("%s\n",new);
 	return (new);
 }
