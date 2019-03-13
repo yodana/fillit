@@ -6,12 +6,15 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 06:14:26 by yodana            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/03/11 17:17:18 by yodana           ###   ########.fr       */
+=======
+/*   Updated: 2019/03/11 20:12:10 by arbocqui         ###   ########.fr       */
+>>>>>>> fafa1b48cf28b36aed1d1ccece0256776a9c54a6
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 void	ft_error()
 {
@@ -48,11 +51,18 @@ int			ft_block(int i, int j, char **map)
 	return (count);
 }
 
-void	ft_check_errors(int i, int links, int blocks)
+void	ft_check_errors(int i, int links, int blocks, char **map)
 {
+	int		k;
+
+	k = 0;
+	while (map[k])
+		k++;
 	if (ft_end_block(i) && (links != 6 && links != 8))
 		ft_error();
 	if (ft_end_block(i) && (blocks != 4))
+		ft_error();
+	if (ft_end_block(i) && i < k && map[i][0] != '\0')
 		ft_error();
 }
 
@@ -75,12 +85,12 @@ void		ft_check_line(char **map, int i, int j)
 		}
 		if (!(ft_end_block(i)) && j != 4)
 			ft_error();
-		ft_check_errors(i, links, blocks);
+		ft_check_errors(i, links, blocks, map);
 		blocks = (ft_end_block(i)) ? 0 : blocks;
 		links = (ft_end_block(i)) ? 0 : links;
 		i++;
 		j = 0;
 	}
-	ft_check_errors(i, links, blocks);
+	ft_check_errors(i, links, blocks, map);
 	((i + 1) % 5 != 0 || i >= 130) ? ft_error() : 0;
 }

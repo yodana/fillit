@@ -6,12 +6,62 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/11 20:27:02 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/13 05:27:51 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
+
+int		ft_calc_x(char *piece)
+{
+	int i;
+	int x_max;
+	int tmp;
+	
+	tmp = 0;
+	x_max = 0;
+	i = 0;
+	while (piece[i])
+	{
+		if (piece[i] == '#')
+		{
+			x_max++;
+			while ((i + 1) % 4 != 0 && i != 0)
+				i++;
+		}
+		i++;
+	}
+	printf("x == %d\n",x_max);
+	return (x_max);
+}
+int		ft_calc_y(char *piece)
+{
+	int i;
+	int y_max;
+	int tmp;
+
+	tmp = 0;
+	y_max = 0;
+	i = 0;
+	if (ft_strstr(piece, "##...##" )!= NULL)
+			return (4);
+	while(piece[i])
+	{
+		if (piece[i] == '#')
+			tmp++;
+		if (((i + 1) % 4) == 0 && i != 0)
+		{
+			if (tmp > y_max)
+				y_max = tmp;
+			tmp = 0;
+		}
+			i++;
+	}
+	printf("y_max = %d\n",y_max);
+	return (y_max);
+}
+
 int		ft_points(char *piece)
 {
 	int points;
@@ -22,6 +72,7 @@ int		ft_points(char *piece)
 	y = 0;
 	j = 0;
 	points = 1;
+	tab[1] = 1;
 	while (piece[j])
 	{
 		if (piece[j] == '#')
@@ -39,8 +90,7 @@ int		ft_points(char *piece)
 		j++;
 		points++;
 	}
-	printf(" points = %d\n",tab[0] - tab[1]);
-	return(tab[0] - tab[1]);
+		return(tab[0] - tab[1]);
 }
 
 char	*ft_new_piece(char *piece, int points,int blocks)

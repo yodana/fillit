@@ -6,27 +6,40 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/11 19:57:33 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/13 05:07:00 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 #include <stdio.h>
-t_final_map	*ft_new_map(int new_x, int new_y)
+
+int			ft_tetris_count(t_tetris *lst)
 {
-	t_final_map *new;
-	char **map;
-	int x;
-	int y;
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+char		**ft_clean_map(int side, char **map)
+{
+	int		x;
+	int		y;
 
 	x = 0;
 	y = 0;
-	map = (char**)malloc(sizeof(char*) * 33);
+	if (!(map = (char**)malloc(sizeof(char*) * side + 1)))
+		return (NULL);
 	map[x] = ft_strnew(0);
-	while (x < new_x)
+	while (x < side)
 	{
-		while (y < new_y)
+		while (y < side)
 		{
 			map[x][y] = '.';
 			y++;
@@ -34,13 +47,24 @@ t_final_map	*ft_new_map(int new_x, int new_y)
 		map[x][y] = '\0';
 		y = 0;
 		x++;
-		map[x] = ft_strnew(4);
+		map[x] = ft_strnew(side);
 	}
 	map[x] = NULL;
-	new = malloc(sizeof(t_final_map));
+	return (map);
+}
+
+t_final_map	*ft_new_map(int side)
+{
+	t_final_map *new;
+	char **map;
+
+	map = NULL;
+	map = ft_clean_map(side, map);
+	if (!(new = (t_final_map*)malloc(sizeof(t_final_map))))
+		return (NULL);
 	new->next = NULL;
-	new->x = new_x;
-	new->y = new_y;
+	new->x = side;
+	new->y = side;
 	new->sol = map;
 	return (new);
 }
@@ -49,8 +73,10 @@ t_tetris	*ft_new_tetris()
 {
 	t_tetris *new;
 
-	new = malloc(sizeof(t_tetris));
+	if (!(new = (t_tetris*)malloc(sizeof(t_tetris))))
+		return (NULL);
 	new->next = NULL;
-	new->map = (char*)malloc(sizeof(char) * 33);
+	if (!(new->map = (char*)malloc(sizeof(char))))
+		return (NULL);
 	return (new);
 }

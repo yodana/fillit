@@ -13,7 +13,7 @@ SRC = ft_bzero.c ft_putstr.c ft_putchar.c ft_putendl.c ft_putnbr.c ft_strnew.c \
 	ft_strsplit.c ft_itoa.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_abs.c ft_isspace.c \
 	ft_strrev.c ft_lstcount.c ft_printlst.c ft_isblank.c ft_printcolor.c \
-	ft_strjoin_fr.c get_next_line.c
+	ft_strjoin_fr.c ft_sqrt.c get_next_line.c
 
 HEADER = libft.h
 

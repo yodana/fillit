@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:02:10 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/18 14:54:15 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/13 04:31:53 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define GREEN "\033[0;32m"
 # define RED "\033[0;31m"
 # define BUFF_SIZE 32
+int				ft_sqrt(int nbr);
 char			*ft_strjoin_fr(char *s1, char *s2, int i);
 char			*ft_itoa(int c);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
