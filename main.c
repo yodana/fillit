@@ -62,6 +62,7 @@ t_tetris	*ft_add_piece(char **map, t_tetris *piece)
 			if ((i + 1) % 5 == 0)
 			{
 				piece->y_max = ft_calc_y(piece->map);
+				piece->x_max = ft_calc_x(piece->map);
 				piece->map = ft_piece(piece->map);
 				printf("piece = %s\n",piece->map);
 				ft_putchar('\n');
@@ -77,6 +78,7 @@ t_tetris	*ft_add_piece(char **map, t_tetris *piece)
 	}
 	piece->y_max = ft_calc_y(piece->map);
 	piece->x_max = ft_calc_x(piece->map);
+	printf("x max de la piece = %d\n",piece->x_max);
 	piece->map = ft_piece(piece->map);
 	return (piece);
 }
@@ -107,7 +109,7 @@ int i = 1;
 while (nbr_t * 4 >= i * i)
 	i++;
 printf("i = %d\n",i); 
-	final_map = ft_new_map(i);
+	final_map = ft_new_map(4);
 	printf("piece = %s\n",piece->map);
 	ft_putchar('\n');
 	ft_resolv(final_map,piece, 0,0,begin);
