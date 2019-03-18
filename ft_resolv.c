@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/13 05:38:10 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:56:56 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_resolv(t_final_map *final_map, t_tetris *piece, int x, int y, t_tetris *
 		if (ft_put_piece(sol, tetris, x, y , final_map->y) != NULL)
 		{
 			sol = ft_put_piece(sol, tetris, x, y,final_map->y);
-			if (ft_check_sol(sol,final_map->sol) == 1)
+			if (ft_check_sol(sol, final_map->sol) == 1)
 				final_map->sol = sol;
 			i = 0;
 		while (i < final_map->y)
