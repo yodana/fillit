@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/14 17:55:59 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:58:59 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ char	**ft_put_piece(char **sol, char *piece, int x, int y, int y_max)
 	tmp = ft_tmp(sol);
 	i = 0;
 	int points;
-	int blocks = 0;
 	points = 0;
+	int blocks = 0;
 	if (tmp[x][y - 1] && tmp[x][y - 1] == '#')
 	{
 		while (piece[i] != '#')
@@ -89,9 +89,44 @@ void	ft_resolv(t_final_map *final_map, t_tetris *piece, int x, int y, t_tetris *
 {
 	char **sol = final_map->sol;
 	char *tetris = piece->map;
-	if (x == final_map->x)
+	int i = 0;
+	if (piece == NULL)
+		return ;
+	while ((final_map->x - x - piece->x_max + 1) >= 0)
 	{
-		if (piece  == NULL)
+		while((final_map->y - y - piece->y_max + 1) > 0)
+		{
+		if (ft_put_piece(sol, tetris, x, y , final_map->y) != NULL)
+		{
+			sol = ft_put_piece(sol, tetris, x, y,final_map->y);
+			i = 0;
+		while (i < final_map->y)
+		{
+			printf("x == %d   %s\n",x,sol[i]);
+			i++;
+		}
+			ft_putchar('\n');
+			if (piece->next)
+			{
+				final_map->sol = sol;
+				ft_resolv(final_map, piece->next,0,0,begin);
+				t_final_map *new = ft_new_map((final_map->x));
+				sol = new->sol;
+			}
+			else
+				sol = final_map->sol;
+		}
+		y++;
+		}
+		y = 0;
+		x++;
+	}
+	t_final_map *new = ft_new_map((final_map->x) + 1);
+	if (ft_put_piece(new->sol,tetris,x ,y,final_map->y + 1) == NULL)
+		ft_resolv(new, begin, 0, 0, begin);
+	/*if (x == final_map->x)
+	{
+		if(piece  == NULL)
 			return ;
 		t_final_map *new = ft_new_map((final_map->x) + 1);
 		ft_resolv(new, begin, 0, 0,begin);
@@ -106,7 +141,7 @@ void	ft_resolv(t_final_map *final_map, t_tetris *piece, int x, int y, t_tetris *
 		{
 			sol = ft_put_piece(sol, tetris,x, y,final_map->y);
 			final_map->sol = sol;
-		}	
+		}
 		else
 		{
 			ft_resolv(final_map, piece, x , y + 1,begin);
@@ -116,10 +151,10 @@ void	ft_resolv(t_final_map *final_map, t_tetris *piece, int x, int y, t_tetris *
 			ft_resolv(final_map, piece->next,x, y,begin);
 	}
 	x = 0;
-	while (x < final_map->y)
+	while (x < final_map->x)
 	{
 		printf("%s\n",sol[x]);
 		x++;
 	}
 	ft_putchar('\n');
-}
+*/}

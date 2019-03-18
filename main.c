@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/13 23:35:32 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/18 17:55:19 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_tetris	*ft_add_piece(char **map, t_tetris *piece)
 			if ((i + 1) % 5 == 0)
 			{
 				piece->y_max = ft_calc_y(piece->map);
+				piece->x_max = ft_calc_x(piece->map);
 				piece->map = ft_piece(piece->map);
 				printf("piece = %s\n",piece->map);
 				ft_putchar('\n');
@@ -77,6 +78,7 @@ t_tetris	*ft_add_piece(char **map, t_tetris *piece)
 	}
 	piece->y_max = ft_calc_y(piece->map);
 	piece->x_max = ft_calc_x(piece->map);
+	printf("x max de la piece = %d\n",piece->x_max);
 	piece->map = ft_piece(piece->map);
 	return (piece);
 }
@@ -102,11 +104,11 @@ int			main(int argc, char **argv)
 	piece = ft_add_piece(map, piece);
 	t_tetris *begin = piece;
 	printf("lst nbr = %d\n,",ft_sqrt(8));
-	int nbr_t = ft_tetris_count(piece);
-	int i = 1;	
-	while (nbr_t * 4 >= i * i)
-		i++;
-	printf("i = %d\n",i); 
+int nbr_t = ft_tetris_count(piece);
+int i = 1;	
+while (nbr_t * 4 >= i * i)
+	i++;
+printf("i = %d\n",i); 
 	final_map = ft_new_map(i);
 	printf("piece = %s\n",piece->map);
 	ft_putchar('\n');
