@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/19 02:38:33 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/19 23:29:34 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,21 @@ int		ft_calc_y(char *piece)
 int		ft_points(char *piece)
 {
 	int points;
-	int tab[2];
-	int y;
+	int i;
 	int j;
 
-	y = 0;
+	i = 0;
 	j = 0;
-	points = 1;
-	tab[1] = 1;
-	while (piece[j])
-	{
-		if (piece[j] == '#')
-		{
-			tab[y] = points;
-			points = 0;
-			if (y < 1)
-				y++;
-			while ((j + 1) % 4 != 0)
-				j++;
-		}
-		if ((j + 1) % 4 == 0)
-			points = 0;
-		j++;
-		points++;
-	}
-		return(tab[0] - tab[1]);
+	points = 0;
+	while (piece[i])
+//	{
+//		printf("piece c --> %s\n", piece);
+		i++;
+//	}
+	return(1);
 }
 
-char	*ft_new_piece(char *piece, int points,int blocks)
+char	*ft_new_piece(char *piece, int points, int blocks)
 {
 	int i;
 	char *new;
@@ -99,6 +86,7 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 	j = 0;
 	new = (char*)malloc(sizeof(char) * 100);
 	i = 0;
+//	printf("piece clean rev %s\n", piece);
 	while (piece[i] == '.')
 		i++;
 	while (blocks < 4)
@@ -110,6 +98,7 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 		i++;
 	}
 	new[j] = piece[i];
+//	printf("new piece sans points %s\n", new);
 	while (points > 0)
 	{
 		points--;
@@ -117,6 +106,7 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 		j++;
 	}
 	new[j] = '\0';
+//	printf("new piece avec points %s\n", new);
 	return (ft_strrev(new));
 }
 

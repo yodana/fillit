@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/19 04:53:29 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/20 00:20:26 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ void	printlist(t_tetris *piece)
 }
 */
 
-void	ft_lstajout(t_tetris **piece, t_tetris *new)
+void	ft_lstajout(t_tetris **piece, t_tetris *new, char *temp)
 {
 	t_tetris	*tmp;
 
+	new = ft_new_tetris(temp);
 	if (new)
 	{
 		tmp = *piece;
@@ -66,6 +67,7 @@ char	**ft_stock_map(char *argv, char *line, char **map)
 	}
 	close(fd);
 	map[i] = NULL;
+	i = 0;
 	return (map);
 }
 
@@ -78,22 +80,19 @@ t_tetris	*ft_add_piece(char **map)
 
 	i = 0;
 	tmp = ft_strnew(0);
+	new = NULL;
 	while (map[i])
 	{
 		tmp = ft_strjoin(tmp, map[i]);
-		if (i % 4 == 0 && i != 0)
+		if ((i + 1) % 5 == 0)
 		{
-			if (i == 4)
-				piece = ft_new_tetris(tmp);
-			else
-			{
-				new = ft_new_tetris(tmp);
-				ft_lstajout(&piece, new);
-			}
+			(i == 4) ?
+				piece = ft_new_tetris(tmp) : ft_lstajout(&piece, new, tmp);
 			tmp = ft_strnew(0);
 		}
 		i++;
 	}
+	(i == 4) ? piece = ft_new_tetris(tmp) : ft_lstajout(&piece, new, tmp);
 	return (piece);
 }
 
