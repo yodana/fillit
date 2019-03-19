@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/19 04:45:09 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/19 05:27:18 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+void	printlist(t_tetris *piece)
+{
+	while (piece)
+	{
+		ft_putstr(piece->map);
+		ft_putstr("\t->\t");
+		piece = piece->next;
+	}
+	ft_putstr("NULL");
+}
+
+
 void	ft_lstajout(t_tetris **piece, t_tetris *new)
 {
-	if (piece && new)
+	t_tetris	*tmp;
+
+	if (new)
 	{
-		new->next = *piece;
-		*piece = new;
+		tmp = *piece;
+		if (tmp == NULL)
+			tmp = new;
+		else
+		{
+			while (tmp->next)
+				tmp = tmp->next;
+			tmp->next = new;
+		}
 	}
 }
 
@@ -40,8 +62,6 @@ char	**ft_stock_map(char *argv, char *line, char **map)
 	while (get_next_line(fd, &line))
 	{
 		map[i] = ft_strdup(line);
-		if (map[i] == NULL)
-			map[i] = ft_strdup("\n");
 		i++;
 	}
 	close(fd);
@@ -49,37 +69,31 @@ char	**ft_stock_map(char *argv, char *line, char **map)
 	return (map);
 }
 
-t_tetris	*ft_add_piece(char **map, t_tetris *piece)
+t_tetris	*ft_add_piece(char **map)
 {
-	int	i;
-	int	j;
-	t_tetris *new;
+	int			i;
+	char		*tmp;
+	t_tetris	*new;
+	t_tetris	*piece;
 
 	i = 0;
-	j = 0;
-	while (map[i] != NULL)
+	tmp = ft_strnew(0);
+	while (map[i])
 	{
-			if ((i + 1) % 5 == 0)
+		tmp = ft_strjoin(tmp, map[i]);
+		i++;
+		if (i % 4 == 0 && i != 0)
+		{
+			if (i == 4)
+				piece = ft_new_tetris(tmp);
+			else
 			{
-				piece->y_max = ft_calc_y(piece->map);
-				piece->x_max = ft_calc_x(piece->map);
-				piece->map = ft_piece(piece->map);
-				printf("piece = %s\n",piece->map);
-				ft_putchar('\n');
-				new = ft_new_tetris();
-				ft_lstajout(&piece,new);
-				piece = new;
-				i++;
-				j = 0;
+				new = ft_new_tetris(tmp);
+				ft_lstajout(&piece, new);
 			}
-			piece->map = ft_strjoin(piece->map, map[i]);
-			j++;
-			i++;
+			tmp = ft_strnew(0);
+		}
 	}
-	piece->y_max = ft_calc_y(piece->map);
-	piece->x_max = ft_calc_x(piece->map);
-	printf("x max de la piece = %d\n",piece->x_max);
-	piece->map = ft_piece(piece->map);
 	return (piece);
 }
 
@@ -93,15 +107,14 @@ int			main(int argc, char **argv)
 	line = NULL;
 	if (!(map = (char**)malloc(sizeof(char*))))
 		return (0);
-	if (argc !=	 2)
+	if (argc != 2)
 	{
 		ft_putendl("usage: ./fillit tetris_file");
 		return (0);
 	}
-	piece = ft_new_tetris();
 	map = ft_stock_map(argv[1], line, map);
 	ft_check_line(map, 0, 0);
-	piece = ft_add_piece(map, piece);
+	piece = ft_add_piece(map);
 	t_tetris *begin = piece;
 	printf("lst nbr = %d\n,",ft_sqrt(8));
 int nbr_t = ft_tetris_count(piece);
@@ -109,18 +122,16 @@ int i = 1;
 while (nbr_t * 4 > i * i)
 	i++;
 printf("i = %d\n",i); 
-	final_map = ft_new_map(i);
+	final_map = ft_new_map(4);
 	printf("piece = %s\n",piece->map);
 	ft_putchar('\n');
 	int z;
 	z = 0;
-	while ((z = ft_resolv(final_map,begin, 0,0,begin) == 0))
-	{
-		printf("z == %d\n",z);
+	ft_resolv(final_map,begin, 0,0,begin);
+	/*{
 		i++;
 		free(final_map);
-		t_final_map *new = ft_new_map(i);
-		final_map = new;
-	}
+		final_map = ft_new_map(i);
+	}*/
 	return (0);
 }

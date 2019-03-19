@@ -6,7 +6,11 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/03/19 04:49:07 by yodana           ###   ########.fr       */
+=======
+/*   Updated: 2019/03/19 02:38:33 by arbocqui         ###   ########.fr       */
+>>>>>>> 543a0c2c1f0f91b32092a33ae81b1ec8002abcf0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +36,6 @@ int		ft_calc_x(char *piece)
 		}
 		i++;
 	}
-	printf("x == %d\n",x_max);
 	return (x_max);
 }
 int		ft_calc_y(char *piece)
@@ -58,7 +61,6 @@ int		ft_calc_y(char *piece)
 		}
 			i++;
 	}
-	printf("y_max = %d\n",y_max);
 	return (y_max);
 }
 
@@ -78,7 +80,6 @@ int		ft_points(char *piece)
 		if (piece[j] == '#')
 		{
 			tab[y] = points;
-			printf("tab = %d || y == %d\n",tab[y], y);
 			points = 0;
 			if (y < 1)
 				y++;
@@ -132,8 +133,6 @@ char	*ft_piece(char *piece)
 
 	i = 0;
 	points = ft_points(piece);
-	printf("points dans main = %d\n",points);
 	new = ft_new_piece(ft_strrev(piece), points, 0);
-	printf("%s\n",new);
 	return (new);
 }
