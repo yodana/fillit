@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/18 17:55:19 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/19 04:45:09 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,21 @@ int			main(int argc, char **argv)
 	printf("lst nbr = %d\n,",ft_sqrt(8));
 int nbr_t = ft_tetris_count(piece);
 int i = 1;	
-while (nbr_t * 4 >= i * i)
+while (nbr_t * 4 > i * i)
 	i++;
 printf("i = %d\n",i); 
 	final_map = ft_new_map(i);
 	printf("piece = %s\n",piece->map);
 	ft_putchar('\n');
-	ft_resolv(final_map,piece, 0,0,begin);
+	int z;
+	z = 0;
+	while ((z = ft_resolv(final_map,begin, 0,0,begin) == 0))
+	{
+		printf("z == %d\n",z);
+		i++;
+		free(final_map);
+		t_final_map *new = ft_new_map(i);
+		final_map = new;
+	}
 	return (0);
 }
