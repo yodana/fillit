@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/18 18:03:48 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/19 03:52:38 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,8 @@ void	ft_resolv(t_final_map *final_map, t_tetris *piece, int x, int y, t_tetris *
 			i = 0;
 		while (i < final_map->y)
 		{
-			printf("x == %d   %s\n",x,sol[i]);
 			i++;
 		}
-			ft_putchar('\n');
 			if (piece->next)
 			{
 				final_map->sol = sol;
@@ -121,9 +119,9 @@ void	ft_resolv(t_final_map *final_map, t_tetris *piece, int x, int y, t_tetris *
 		y = 0;
 		x++;
 	}
-	t_final_map *new = ft_new_map((final_map->x) + 1);
-	if (ft_put_piece(new->sol,tetris,x ,y,final_map->y + 1) == NULL)
-		ft_resolv(new, begin, 0, 0, begin);
+//	t_final_map *new = ft_new_map((final_map->x) + 1);
+//	if (ft_put_piece(new->sol,tetris,x ,y,final_map->y + 1) == NULL)
+//		ft_resolv(new, begin, 0, 0, begin);
 	/*if (x == final_map->x)
 	{
 		if(piece  == NULL)

@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 15:26:16 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/13 05:27:01 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/18 22:44:04 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_tetris
 	struct s_tetris *next;
 	int y_max;
 	int x_max;
+
 }				t_tetris;
 
 typedef struct s_final_map
