@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/20 00:20:26 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/20 00:22:49 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
+
 void	printlist(t_tetris *piece)
 {
 	while (piece)
@@ -25,7 +25,7 @@ void	printlist(t_tetris *piece)
 	}
 	ft_putstr("NULL");
 }
-*/
+
 
 void	ft_lstajout(t_tetris **piece, t_tetris *new, char *temp)
 {
@@ -90,7 +90,6 @@ t_tetris	*ft_add_piece(char **map)
 				piece = ft_new_tetris(tmp) : ft_lstajout(&piece, new, tmp);
 			tmp = ft_strnew(0);
 		}
-		i++;
 	}
 	(i == 4) ? piece = ft_new_tetris(tmp) : ft_lstajout(&piece, new, tmp);
 	return (piece);
@@ -115,11 +114,22 @@ int			main(int argc, char **argv)
 	ft_check_line(map, 0, 0);
 	piece = ft_add_piece(map);
 	t_tetris *begin = piece;
-	int nbr_t = ft_tetris_count(piece);
-	int i = 1;
-	while (nbr_t * 4 >= i * i)
-		i++;
+	printf("lst nbr = %d\n,",ft_sqrt(8));
+int nbr_t = ft_tetris_count(piece);
+int i = 1;	
+while (nbr_t * 4 > i * i)
+	i++;
+printf("i = %d\n",i); 
 	final_map = ft_new_map(4);
-	ft_resolv(final_map,piece, 0,0,begin);
+	printf("piece = %s\n",piece->map);
+	ft_putchar('\n');
+	int z;
+	z = 0;
+	ft_resolv(final_map,begin, 0,0,begin);
+	/*{
+		i++;
+		free(final_map);
+		final_map = ft_new_map(i);
+	}*/
 	return (0);
 }

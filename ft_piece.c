@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/19 23:29:34 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/20 00:24:06 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,32 @@ int		ft_calc_y(char *piece)
 int		ft_points(char *piece)
 {
 	int points;
-	int i;
+	int y;
 	int j;
+	int	tab[2];
 
-	i = 0;
+	y = 0;
 	j = 0;
-	points = 0;
-	while (piece[i])
-//	{
-//		printf("piece c --> %s\n", piece);
-		i++;
-//	}
-	return(1);
+	points = 1;
+	tab[1] = 1;
+	while (piece[j])
+	{
+		if (piece[j] == '#')
+		{
+			tab[y] = points;
+			points = 0;
+			if (y < 1)
+				y++;
+			while ((j + 1) % 4 != 0)
+				j++;
+		}
+		if ((j + 1) % 4 == 0)
+			points = 0;
+		j++;
+		points++;
+	}
+	printf("points == %d\n",tab[1]);
+		return(tab[0] - tab[1]);
 }
 
 char	*ft_new_piece(char *piece, int points, int blocks)
