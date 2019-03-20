@@ -87,8 +87,9 @@ int		ft_points(char *piece)
 		j++;
 		points++;
 	}
-	printf("points == %d\n",tab[1]);
-		return(tab[0] - tab[1]);
+	printf("piece points == %s\n", piece);
+	printf("points == %d\n", tab[0]);
+	return(tab[0] - tab[1]);
 }
 
 char	*ft_new_piece(char *piece, int points, int blocks)
@@ -100,10 +101,11 @@ char	*ft_new_piece(char *piece, int points, int blocks)
 	j = 0;
 	new = (char*)malloc(sizeof(char) * 100);
 	i = 0;
-//	printf("piece clean rev %s\n", piece);
+	printf("piece la %s\n", piece);
 	while (piece[i] == '.')
 		i++;
-	while (blocks < 4)
+// while (blocks < 4)
+	while (piece[i])
 	{
 		if (piece[i] == '#')
 			blocks++;
@@ -111,16 +113,19 @@ char	*ft_new_piece(char *piece, int points, int blocks)
 		j++;
 		i++;
 	}
-	new[j] = piece[i];
-//	printf("new piece sans points %s\n", new);
+	(void)points;
+/*	new[j] = piece[i];
+	j++;
+	points = -points;
+	printf("points new piece %d \n", points);
 	while (points > 0)
 	{
 		points--;
 		new[j] = '.';
 		j++;
-	}
+	}*/
 	new[j] = '\0';
-//	printf("new piece avec points %s\n", new);
+	printf("new piece avec points %s\n", new);
 	return (ft_strrev(new));
 }
 
@@ -133,5 +138,6 @@ char	*ft_piece(char *piece)
 	i = 0;
 	points = ft_points(piece);
 	new = ft_new_piece(ft_strrev(piece), points, 0);
+	printf("piece = %s\n", new);
 	return (new);
 }
