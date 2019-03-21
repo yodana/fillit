@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 03:19:41 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/21 12:48:22 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_tmp(char **sol)
 	int i;
 
 	i = 0;
-	tmp = (char**)malloc(sizeof(char) * 100);
+	tmp = (char**)malloc(sizeof(char*) * 10000 + 1);
 	while (sol[i])
 	{
 		tmp[i] = ft_strdup(sol[i]);
@@ -63,6 +63,11 @@ void	ft_print(int y, char **sol)
 	ft_putchar('\n');
 }
 
+/*int			ft_put_check(char *sol, t_tetris *piece, int x, int y, int y_max)
+{
+	while (tetris[i])
+	{
+		if ((tmp[x][y] >= 65 && tmp[x][y] <= 90) && tetris*/
 char	**ft_put_piece(char **sol, t_tetris *piece, int x, int y, int y_max)
 {
 	int i;
@@ -146,6 +151,7 @@ int		ft_resolv(t_final_map *final_map, t_tetris *piece,int nbr_p, t_tetris *begi
 		{
 		if (ft_put_piece(final_map->sol, piece, x, y , final_map->y) != NULL)
 		{
+			printf("x == %d || y ===%d\n",x,y);
 			final_map->sol = ft_put_piece(final_map->sol, piece, x, y, final_map->y);
 			//ft_print(final_map->y, final_map->sol);
 			nbr_p++;
@@ -156,10 +162,8 @@ int		ft_resolv(t_final_map *final_map, t_tetris *piece,int nbr_p, t_tetris *begi
 			}
 				//printf("dans else ==\n");
 				//ft_print(final_map->y,sol);
-			//else	
-			//{
-			//	final_map->sol = ft_remove_piece(final_map->sol, piece, x, y,final_map->y);
-			//}
+			else	
+				final_map->sol = ft_remove_piece(final_map->sol, piece, x, y,final_map->y);
 				//ft_print(final_map->y,sol);
 		}
 			y++;

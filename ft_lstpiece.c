@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 02:11:16 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/21 12:29:28 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char		**ft_clean_map(int side, char **map)
 
 	x = 0;
 	y = 0;
-	if (!(map = (char**)malloc(sizeof(char*) * side + 1)))
+	if (!(map = (char**)malloc(sizeof(char*) * 10000 + 1)))
 		return (NULL);
 	map[x] = ft_strnew(0);
 	while (x < side)
@@ -75,9 +75,9 @@ t_tetris	*ft_new_tetris(char *map,int count)
 
 	if (!(new = (t_tetris*)malloc(sizeof(t_tetris))))
 		return (NULL);
-	new->y_max = ft_calc_y(map);
 	new->x_max = ft_calc_x(map);
 	new->map = ft_strdup(ft_piece(map));
+	new->y_max = ft_calc_y(new->map);
 	new->lettre = 65 + count;
 	new->next = NULL;
 	return (new);

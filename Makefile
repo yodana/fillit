@@ -16,6 +16,8 @@ OBJ = $(addprefix $(BIN_FOLDER),$(SRC:.c=.o))
 
 LIB = libft/libft.a
 
+FLAGS = -Wall -Wextra -Werror
+
 all: $(NAME)
 
 bin:
@@ -23,11 +25,11 @@ bin:
 
 $(NAME): bin $(OBJ)
 		@make -C libft
-		@gcc -o $(NAME) $(LIB) $(OBJ)
+		@gcc -o $(NAME) $(LIB) $(OBJ) -g
 		@printf "$(GREEN)Compilation finish $(END_COLOR)"
 
 $(BIN_FOLDER)%.o :%.c
-	@gcc $< -c -I $(HEADER) -o $@ -Wall -Wextra -Werror
+	@gcc $< -c -I $(HEADER) -o $@ -Wall -Wextra -Werror -g
 
 clean :
 	@make clean -C libft
