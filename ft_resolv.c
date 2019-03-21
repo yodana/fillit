@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 03:12:34 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/21 03:19:41 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ char	**ft_remove_piece(char **sol, t_tetris *piece, int x, int y,int y_max)
 	}
 	while (tetris[i])
 	{
-		printf("remove ==\n");
 		ft_print(y_max,tmp);
 		if (tetris[i] == '#')
 		{
@@ -157,10 +156,10 @@ int		ft_resolv(t_final_map *final_map, t_tetris *piece,int nbr_p, t_tetris *begi
 			}
 				//printf("dans else ==\n");
 				//ft_print(final_map->y,sol);
-			else	
-			{
-				final_map->sol = ft_remove_piece(final_map->sol, piece, x, y,final_map->y);
-			}
+			//else	
+			//{
+			//	final_map->sol = ft_remove_piece(final_map->sol, piece, x, y,final_map->y);
+			//}
 				//ft_print(final_map->y,sol);
 		}
 			y++;
