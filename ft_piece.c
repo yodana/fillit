@@ -63,33 +63,44 @@ int		ft_calc_y(char *piece)
 int		ft_points(char *piece)
 {
 	int points;
-	int y;
 	int j;
-	int	tab[2];
+	int	tab[3];
+	int	x;
 
-	y = 0;
+	x = 0;
 	j = 0;
-	points = 1;
-	tab[1] = 1;
+	points = 0;
+	tab[0] = 0;
+	tab[1] = 0;
+	tab[2] = 0;
 	while (piece[j])
 	{
 		if (piece[j] == '#')
 		{
-			tab[y] = points;
+			tab[x] = points;
+			if (tab[2] > tab[1])
+				tab[2] = tab[1];
+			if (x < 1)
+			{
+				x++;
+				tab[2] = tab[0];
+			}
+			if (tab[1] > tab[0])
+				tab[0] = tab[1];
 			points = 0;
-			if (y < 1)
-				y++;
+			printf("points --> %d\n", tab[2]);
 			while ((j + 1) % 4 != 0)
 				j++;
 		}
+		points++;
 		if ((j + 1) % 4 == 0)
 			points = 0;
 		j++;
-		points++;
 	}
 	printf("piece points == %s\n", piece);
-	printf("points == %d\n", tab[0]);
-	return(tab[0] - tab[1]);
+	printf("points 0 == %d\n", tab[0]);
+	printf("points 1 == %d\n", tab[2]);
+	return(tab[0] - tab[2]);
 }
 
 char	*ft_new_piece(char *piece, int points, int blocks)
@@ -104,8 +115,7 @@ char	*ft_new_piece(char *piece, int points, int blocks)
 	printf("piece la %s\n", piece);
 	while (piece[i] == '.')
 		i++;
-// while (blocks < 4)
-	while (piece[i])
+	 while (blocks < 4)
 	{
 		if (piece[i] == '#')
 			blocks++;
@@ -113,17 +123,18 @@ char	*ft_new_piece(char *piece, int points, int blocks)
 		j++;
 		i++;
 	}
-	(void)points;
-/*	new[j] = piece[i];
+/*	
+	new[j] = piece[i];
 	j++;
-	points = -points;
+*/
+//	points = -points;
 	printf("points new piece %d \n", points);
 	while (points > 0)
 	{
 		points--;
 		new[j] = '.';
 		j++;
-	}*/
+	}
 	new[j] = '\0';
 	printf("new piece avec points %s\n", new);
 	return (ft_strrev(new));
