@@ -6,11 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/03/19 04:49:07 by yodana           ###   ########.fr       */
-=======
-/*   Updated: 2019/03/19 02:38:33 by arbocqui         ###   ########.fr       */
->>>>>>> 543a0c2c1f0f91b32092a33ae81b1ec8002abcf0
+/*   Updated: 2019/03/21 02:56:42 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +27,7 @@ int		ft_calc_x(char *piece)
 		if (piece[i] == '#')
 		{
 			x_max++;
-			while ((i + 1) % 4 != 0 && i != 0)
+			while ((i + 1) % 4 != 0)
 				i++;
 		}
 		i++;
@@ -47,14 +43,16 @@ int		ft_calc_y(char *piece)
 	tmp = 0;
 	y_max = 0;
 	i = 0;
-	if (ft_strstr(piece, "##...##" )!= NULL)
-			return (4);
 	while(piece[i])
 	{
-		if (piece[i] == '#')
+		while (piece[i] && piece[i] == '#')
+		{
+			i++;
 			tmp++;
+		}
 		if (((i + 1) % 4) == 0 && i != 0)
 		{
+			printf("y load == %d\n",y_max);
 			if (tmp > y_max)
 				y_max = tmp;
 			tmp = 0;

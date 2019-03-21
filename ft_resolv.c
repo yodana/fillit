@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/19 06:16:48 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/21 03:12:34 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_point(char *piece)
 {
 	int i = 0;
 
-	while (piece[i] != '#')
+	while (piece[i] != '#' || (piece[i] >= 65 && piece[i] <= 90))
 		i++;
 	return (i);
 }
@@ -63,7 +63,7 @@ void	ft_print(int y, char **sol)
 	ft_putchar('\n');
 }
 
-char	**ft_put_piece(char **sol, char *piece, int x, int y, int y_max)
+char	**ft_put_piece(char **sol, t_tetris *piece, int x, int y, int y_max)
 {
 	int i;
 	char **tmp;
@@ -72,36 +72,33 @@ char	**ft_put_piece(char **sol, char *piece, int x, int y, int y_max)
 	int points;
 	points = 0;
 	int blocks = 0;
-	/*if (tmp[x][y - 1] && tmp[x][y - 1] == '#')
+	char *tetris = piece->map;
+	if (tmp[x][y - 1] && tmp[x][y - 1] == '#')
 	{
-		while (piece[i] != '#')
+		while (tetris[i] != '#')
 			i++;
-	}*/
-	while (piece[i])
+	}
+	while (tetris[i])
 	{
-		printf("tmp a chaque instant = \n");
-		ft_print(y_max,tmp);
-		if (tmp[x][y] == '#' && piece[i] == '#')
+		if ((tmp[x][y] >= 65 && tmp[x][y] <= 90) && tetris[i] == '#')
 		{
-			printf("quit\n");
 			return (NULL);
 		}
-		if (piece[i] == '#')
+		if (tetris[i] == '#')
 		{
-			tmp[x][y] = '#';
+			tmp[x][y] = piece->lettre;
 			blocks++;
 		}
 		y++;
-		if (i > 1 && (points = ft_point(&(piece[i]))) > 0)
+		if (i > 1 && (points = ft_point(&(tetris[i]))) > 0)
 			i = i + points - 1;
 		i++;
 		ft_calc_x_y(points, &y, &x,y_max);
 	}
-	printf("y == %d",y);
 	return (tmp);
 }
 
-char	**ft_remove_piece(char **sol, char *piece, int x, int y,int y_max)
+char	**ft_remove_piece(char **sol, t_tetris *piece, int x, int y,int y_max)
 {
 		int i;
 	char **tmp;
@@ -110,20 +107,23 @@ char	**ft_remove_piece(char **sol, char *piece, int x, int y,int y_max)
 	int points;
 	points = 0;
 	int blocks = 0;
+	char *tetris = piece->map;
 	if (tmp[x][y - 1] && tmp[x][y - 1] == '.')
 	{
-		while (piece[i] != '#')
+		while (tetris[i] != '#')
 			i++;
 	}
-	while (tmp[x] && piece[i])
+	while (tetris[i])
 	{
-		if (piece[i] == '#')
+		printf("remove ==\n");
+		ft_print(y_max,tmp);
+		if (tetris[i] == '#')
 		{
 			tmp[x][y] = '.';
 			blocks++;
 		}
 		y++;
-		if (i > 1 && (points = ft_point(&(piece[i]))) > 0)
+		if (i > 1 && (points = ft_point(&(tetris[i]))) > 0)
 			i = i + points - 1;
 		i++;
 		ft_calc_x_y(points, &y, &x,y_max);
@@ -131,37 +131,36 @@ char	**ft_remove_piece(char **sol, char *piece, int x, int y,int y_max)
 	return (tmp);
 }
 
-int		ft_resolv(t_final_map *final_map, t_tetris *piece)
+int		ft_resolv(t_final_map *final_map, t_tetris *piece,int nbr_p, t_tetris *begin)
 {
-	//printf("coucou\n");
-	printf("lst count %d\n",ft_tetris_count(piece));
 	ft_print(final_map->y, final_map->sol);
 	if (piece == NULL)
 		return (1);
-		char **sol = final_map->sol;
 	int x = 0;
 	int y = 0;
 	//int b = 1;
 	//char **tmp = ft_tmp(sol);
 	//static char **save = NULL;
-	while ((final_map->x - x - piece->x_max + 1) > 0)
+	while (x < final_map->y - piece->x_max + 1)
 	{
-		while((final_map->y - y - piece->y_max + 1) > 0)
+		while(y < final_map->y - piece->y_max + 1)
 		{
-		if (ft_put_piece(sol, piece->map, x, y , final_map->y) != NULL)
+		if (ft_put_piece(final_map->sol, piece, x, y , final_map->y) != NULL)
 		{
-			sol = ft_put_piece(sol, piece->map, x, y, final_map->y);
-			printf("Apres le put == \n");
-			ft_print(final_map->y, sol);
-			final_map->sol = sol;
+			final_map->sol = ft_put_piece(final_map->sol, piece, x, y, final_map->y);
+			//ft_print(final_map->y, final_map->sol);
+			nbr_p++;
 			//ft_print(final_map->y,final_map->sol);
-			if (ft_resolv(final_map, piece->next))
+			if (ft_resolv(final_map, piece->next,nbr_p,begin))
 			{
 				return (1);
 			}
 				//printf("dans else ==\n");
 				//ft_print(final_map->y,sol);
-				sol = ft_remove_piece(sol, piece->map, x, y,final_map->y);
+			else	
+			{
+				final_map->sol = ft_remove_piece(final_map->sol, piece, x, y,final_map->y);
+			}
 				//ft_print(final_map->y,sol);
 		}
 			y++;

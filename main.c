@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/19 05:27:18 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/21 03:13:34 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,34 @@ t_tetris	*ft_add_piece(char **map)
 
 	i = 0;
 	tmp = ft_strnew(0);
+	int count = 0;
 	while (map[i])
 	{
 		tmp = ft_strjoin(tmp, map[i]);
-		i++;
-		if (i % 4 == 0 && i != 0)
+		if ((i + 1) % 5 == 0)
 		{
 			if (i == 4)
-				piece = ft_new_tetris(tmp);
-			else
 			{
-				new = ft_new_tetris(tmp);
+				piece = ft_new_tetris(tmp, count);
+			}
+				else
+			{
+				new = ft_new_tetris(tmp,count);
 				ft_lstajout(&piece, new);
 			}
 			tmp = ft_strnew(0);
+			count++;
 		}
+		i++;
 	}
-	return (piece);
+	if (i == 4)
+		piece = ft_new_tetris(tmp,count);
+	else
+	{
+		new = ft_new_tetris(tmp,count);
+		ft_lstajout(&piece, new);
+	}
+		return (piece);
 }
 
 int			main(int argc, char **argv)
@@ -122,16 +133,18 @@ int i = 1;
 while (nbr_t * 4 > i * i)
 	i++;
 printf("i = %d\n",i); 
-	final_map = ft_new_map(4);
-	printf("piece = %s\n",piece->map);
+	final_map = ft_new_map(i);
+	printlist(begin);
 	ft_putchar('\n');
 	int z;
 	z = 0;
-	ft_resolv(final_map,begin, 0,0,begin);
-	/*{
+	int nbr_p = 0;
+	while(ft_resolv(final_map,begin,nbr_p,begin) != 1)
+	{
 		i++;
 		free(final_map);
-		final_map = ft_new_map(i);
-	}*/
+		t_final_map *new = ft_new_map(i);
+		final_map = new;
+	}
 	return (0);
 }
