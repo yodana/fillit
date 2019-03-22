@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 12:48:22 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/22 02:06:05 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ char	**ft_tmp(char **sol)
 {
 	char **tmp;
 	int i;
-
 	i = 0;
-	tmp = (char**)malloc(sizeof(char*) * 10000 + 1);
+	tmp = (char**)malloc(sizeof(char*) * 10000);
 	while (sol[i])
 	{
 		tmp[i] = ft_strdup(sol[i]);
@@ -113,14 +112,13 @@ char	**ft_remove_piece(char **sol, t_tetris *piece, int x, int y,int y_max)
 	points = 0;
 	int blocks = 0;
 	char *tetris = piece->map;
-	if (tmp[x][y - 1] && tmp[x][y - 1] == '.')
+	if (tmp[x][y - 1] && tmp[x][y - 1] == '#')
 	{
 		while (tetris[i] != '#')
 			i++;
 	}
 	while (tetris[i])
 	{
-		ft_print(y_max,tmp);
 		if (tetris[i] == '#')
 		{
 			tmp[x][y] = '.';
@@ -143,7 +141,6 @@ int		ft_resolv(t_final_map *final_map, t_tetris *piece,int nbr_p, t_tetris *begi
 	int x = 0;
 	int y = 0;
 	//int b = 1;
-	//char **tmp = ft_tmp(sol);
 	//static char **save = NULL;
 	while (x < final_map->y - piece->x_max + 1)
 	{

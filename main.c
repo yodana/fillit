@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 12:35:30 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/22 03:32:18 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ char	**ft_stock_map(char *argv, char *line, char **map)
 	fd = open(argv, O_RDONLY);
 	i = 0;
 	while (get_next_line(fd, &line))
+	{
 		i++;
+		free(line);
+	}
 	close(fd);
 	if (!(map = (char**)malloc(sizeof(char*) * (i + 1))))
 		return (NULL);
@@ -62,6 +65,7 @@ char	**ft_stock_map(char *argv, char *line, char **map)
 	while (get_next_line(fd, &line))
 	{
 		map[i] = ft_strdup(line);
+		free(line);
 		i++;
 	}
 	close(fd);
@@ -77,11 +81,11 @@ t_tetris	*ft_add_piece(char **map)
 	t_tetris	*piece;
 
 	i = 0;
-	tmp = ft_strnew(0);
 	int count = 0;
+	tmp = ft_strnew(0);
 	while (map[i])
 	{
-		tmp = ft_strjoin(tmp, map[i]);
+		tmp = ft_strjoin_fr(tmp, map[i],  1);
 		if ((i + 1) % 5 == 0)
 		{
 			if (i == 4)
@@ -108,13 +112,23 @@ t_tetris	*ft_add_piece(char **map)
 		return (piece);
 }
 
+void		ft_free_map(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		ft_strdel(&map[i]);
+		i++;
+	}
+}
 int			main(int argc, char **argv)
 {
-	char *line;
 	char **map;
+	char *line;
 	t_tetris *piece;
 	t_final_map *final_map;
-
 	line = NULL;
 	if (!(map = (char**)malloc(sizeof(char*))))
 		return (0);
@@ -128,12 +142,12 @@ int			main(int argc, char **argv)
 	piece = ft_add_piece(map);
 	t_tetris *begin = piece;
 	printf("lst nbr = %d\n,",ft_sqrt(8));
-int nbr_t = ft_tetris_count(piece);
+	int nbr_t = ft_tetris_count(piece);
 int i = 1;	
 while (nbr_t * 4 > i * i)
 	i++;
 printf("i = %d\n",i); 
-	final_map = ft_new_map(i);
+final_map = ft_new_map(i);
 	printlist(begin);
 	ft_putchar('\n');
 	int z;

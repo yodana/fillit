@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:12:52 by yodana            #+#    #+#             */
-/*   Updated: 2019/02/18 19:43:19 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/22 03:12:14 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ t_list		*ft_lstcheck(t_list **save, int fd)
 	t_list *tmp;
 
 	tmp = *save;
+	if (fd < 0)
+		return (NULL);
 	while (tmp)
 	{
 		if ((int)tmp->content_size == fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew("\0", fd);
+	tmp = ft_lstnew("\0", 1);
+	tmp->content_size = fd;
 	ft_lstadd(save, tmp);
 	return (tmp);
 }
@@ -42,7 +45,7 @@ char		*ft_save(char *save, char **line)
 		return (NULL);
 	line++;
 	ft_strdel(&save);
-	if (ft_strchr(tmp, '\n'))
+	if (tmp[i] == '\n')
 	{
 		if (!(save = ft_strdup(&tmp[i + 1])))
 			return (NULL);

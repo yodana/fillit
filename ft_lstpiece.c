@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 12:29:28 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/22 02:13:57 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char		**ft_clean_map(int side, char **map)
 
 	x = 0;
 	y = 0;
-	if (!(map = (char**)malloc(sizeof(char*) * 10000 + 1)))
+	if (!(map = (char**)malloc(sizeof(char*) * 33)))
 		return (NULL);
-	map[x] = ft_strnew(0);
+	map[x] = ft_strnew(side);
 	while (x < side)
 	{
 		while (y < side)
