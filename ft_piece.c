@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/21 23:38:18 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/25 06:56:05 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ int		ft_calc_y(char *piece)
 				i++;
 				tmp++;
 			}
-			
 			if (tmp > y_max)
 			{
 				y_max = tmp;
 			}
-			tmp = -1;
+			tmp = 0;
 			while ((i + 1) % 4 != 0)
 				i++;
 		}
@@ -118,10 +117,10 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 	int j;
 
 	j = 0;
-	new = (char*)malloc(sizeof(char) * 100);
 	i = 0;
 	while (piece[i] == '.')
 		i++;
+	new = (char*)malloc(sizeof(char) * ft_strlen(piece) - i + 1);
 	while (blocks < 4)
 	{
 		if (piece[i] == '#')
@@ -138,17 +137,21 @@ char	*ft_new_piece(char *piece, int points,int blocks)
 		j++;
 	}
 	new[j] = '\0';
-	return (ft_strrev(new));
+	ft_strdel(&piece);
+	return (new);
 }
 
 char	*ft_piece(char *piece)
 {
 	int points;
-	char *new;
 	int i;
+	char *tmp;
 
 	i = 0;
 	points = ft_points(piece);
-	new = ft_new_piece(ft_strrev(piece), points, 0);
-	return (new);
+	piece = ft_new_piece(ft_strrev_fr(piece), points, 0);
+	tmp = ft_strrev_fr(piece);
+	piece = tmp;
+	ft_strdel(&tmp);
+	return (piece);
 }

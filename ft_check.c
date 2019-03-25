@@ -6,13 +6,13 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 06:14:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/18 16:18:43 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/25 06:16:25 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_error()
+void		ft_error(void)
 {
 	ft_putstr("error");
 	exit(0);
@@ -47,7 +47,7 @@ int			ft_block(int i, int j, char **map)
 	return (count);
 }
 
-void	ft_check_errors(int i, int links, int blocks, char **map)
+void		ft_check_errors(int i, int links, int blocks, char **map)
 {
 	int		k;
 

@@ -6,13 +6,13 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 17:02:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/05 17:48:51 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/25 02:43:48 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrev(char *str)
+char	*ft_strrev_fr(char *str)
 {
 	char	*new;
 	int		i;
@@ -31,5 +31,6 @@ char	*ft_strrev(char *str)
 		j++;
 		i--;
 	}
+	ft_strdel(&str);
 	return (new);
 }
