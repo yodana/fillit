@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 18:43:26 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 20:12:59 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,18 @@ t_tetris	*ft_add_piece(char **map, int count)
 		tmp = ft_strjoin_fr(tmp, map[i],  1);
 		if ((i + 1) % 5 == 0)
 		{
-			if (i == 4)
-				piece = ft_new_tetris(tmp, count++);
-			else
-			{
-				new = ft_new_tetris(tmp,count++);
-				ft_tetrisadd(&piece, new);
-			}
+			(i == 4) ? piece = ft_new_tetris(tmp, count++)
+				: (new = ft_new_tetris(tmp, count++));
+			(new == NULL) ? piece = NULL : 0;
+			(i > 4 && piece != NULL) ? ft_tetrisadd(&piece, new) : 0;
 			tmp = ft_strnew(0);
 		}
 		i++;
 	}
-	if (i == 4)
-		piece = ft_new_tetris(tmp, count++);
-	else
-	{
-		new = ft_new_tetris(tmp, count++);
-		ft_tetrisadd(&piece, new);
-	}
+	(i == 4) ? piece = ft_new_tetris(tmp, count++)
+		: (new = ft_new_tetris(tmp, count++));
+	(new == NULL) ? piece = NULL : 0;
+	(i > 4 && piece != NULL) ? ft_tetrisadd(&piece, new) : 0;
 	return (piece);
 }
 
@@ -128,6 +122,8 @@ int			main(int argc, char **argv)
 	{
 		ft_check_line(map, 0, 0);
 		piece = ft_add_piece(map, 0);
+		if (piece == NULL)
+			return (0);
 		ft_start(piece);
 		ft_piece_fr(piece);
 		ft_strrdel(map);
