@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/25 06:56:05 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 10:02:15 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,52 +41,35 @@ int		ft_calc_y(char *piece)
 	int i;
 	int y_max;
 	int y_min;
-	int tmp;
-	tmp = 0;
+
 	y_min = 0;
 	y_max = 0;
 	i = 0;
-	printf("piece %s\n",piece);
 	while(piece[i])
 	{
 		if (piece[i] == '#')
 		{
-			if (y_min > i % 4 || i < 5)
-				y_min = i % 4;
-			printf("y_min == %d\n",y_min);
-			while (piece[i] == '#' && ((i + 1) % 5 != 0))
+			if (y_max == 0 && y_min == 0)
 			{
-				i++;
-				tmp++;
+				y_min = i % 4 + 1;
+				y_max = i % 4 + 1;
 			}
-			if (tmp > y_max)
-			{
-				y_max = tmp;
-			}
-			tmp = 0;
-			while ((i + 1) % 4 != 0)
-				i++;
+			if (i % 4 + 1 > y_max)
+				y_max = i % 4 + 1;
+			if (i % 4 + 1 < y_min)
+				y_min = i % 4 + 1;
 		}
-		tmp++;
 		i++;
 	}
-	printf("y+max == %d || y_min == %d || taille y == %d\n",y_max,y_min,y_max - y_min);
-	return (y_max - y_min);
+	return (y_max - y_min + 1);
 }
 
-int		ft_points(char *piece)
+int		ft_points(char *piece, int points, int y, int j)
 {
-	int points;
 	int tab[2];
-	int y;
-	int j;
 
-	y = 0;
-	j = 0;
-	points = 0;
 	tab[0] = -1;
 	tab[1] = -1;
-	printf("piece == %s\n",piece);
 	while (piece[j])
 	{
 		if (piece[j] == '#')
@@ -104,20 +87,17 @@ int		ft_points(char *piece)
 		j++;
 		points++;
 	}
-	printf("tab[0] == %d || tab[1] == %d\n",tab[0],tab[1]);
 	if (tab[0] - tab[1] >= 3 || tab[1] == -1)
 		return (0);
-		return(tab[0] - tab[1]);
+	return(tab[0] - tab[1]);
 }
 
-char	*ft_new_piece(char *piece, int points,int blocks)
+char	*ft_new_piece(char *piece, int points, int blocks,int i)
 {
-	int i;
 	char *new;
 	int j;
 
 	j = 0;
-	i = 0;
 	while (piece[i] == '.')
 		i++;
 	new = (char*)malloc(sizeof(char) * ft_strlen(piece) - i + 1);
@@ -148,7 +128,7 @@ char	*ft_piece(char *piece)
 	char *tmp;
 
 	i = 0;
-	points = ft_points(piece);
+	points = ft_points(piece, 0, 0, 0);
 	piece = ft_new_piece(ft_strrev_fr(piece), points, 0);
 	tmp = ft_strrev_fr(piece);
 	piece = tmp;

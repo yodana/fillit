@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:02:10 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/25 02:44:06 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 03:19:15 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ int				ft_isblank(int c);
 int				ft_abs(int c);
 void			ft_printcolor(char *str, char *color);
 int				get_next_line(const int fd, char **line);
-
+void			ft_strrdel(char **str);
 #endif
