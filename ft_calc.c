@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_calc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/27 03:13:22 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 10:58:01 by yodana           ###   ########.fr       */
+/*   Created: 2019/03/27 10:58:18 by yodana            #+#    #+#             */
+/*   Updated: 2019/03/27 11:08:07 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_final_map_fr(t_final_map *final_map)
+int		ft_point(char *piece)
 {
-	ft_strrdel(final_map->sol);
-	free(final_map);
+	int i;
+
+	i = 0;
+	while (piece[i] != '#')
+		i++;
+	return (i);
 }
 
-void	ft_piece_fr(t_tetris *piece)
+void	ft_calc_x_y(int points, int *y, int *x, int y_max)
 {
-	t_tetris *tmp;
-
-	while (piece)
+	if (points > 0)
+		*y = *y + points - (5 - y_max);
+	if (((*y % y_max) == 0 && *y != 0) || *y > y_max - 1)
 	{
-		ft_strdel(&(piece->map));
-		tmp = piece->next;
-		free(piece);
-		piece = tmp;
+		if (*y > y_max - 1)
+			*y = *y % y_max;
+		else
+			*y = 0;
+		*x = *x + 1;
 	}
 }

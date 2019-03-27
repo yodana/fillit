@@ -6,21 +6,22 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 03:16:43 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 03:20:09 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 10:54:43 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strrdel(char **strr)
+void	ft_strrdel(char **arr)
 {
 	int i;
 
 	i = 0;
-	while (strr[i])
+	while (arr[i])
 	{
-		ft_strdel(&strr[i]);
+		ft_strdel(&arr[i]);
 		i++;
 	}
-	free(strr);
+	free(arr);
+	arr = NULL;
 }

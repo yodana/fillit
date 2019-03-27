@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 10:02:15 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 11:11:29 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_calc_x(char *piece)
 	int i;
 	int x_max;
 	int tmp;
-	
+
 	tmp = 0;
 	x_max = 0;
 	i = 0;
@@ -32,7 +32,6 @@ int		ft_calc_x(char *piece)
 		}
 		i++;
 	}
-	printf("taille x de la piece == %d\n",x_max);
 	return (x_max);
 }
 
@@ -45,7 +44,7 @@ int		ft_calc_y(char *piece)
 	y_min = 0;
 	y_max = 0;
 	i = 0;
-	while(piece[i])
+	while (piece[i])
 	{
 		if (piece[i] == '#')
 		{
@@ -89,13 +88,13 @@ int		ft_points(char *piece, int points, int y, int j)
 	}
 	if (tab[0] - tab[1] >= 3 || tab[1] == -1)
 		return (0);
-	return(tab[0] - tab[1]);
+	return (tab[0] - tab[1]);
 }
 
-char	*ft_new_piece(char *piece, int points, int blocks,int i)
+char	*ft_new_piece(char *piece, int points, int blocks, int i)
 {
-	char *new;
-	int j;
+	char	*new;
+	int		j;
 
 	j = 0;
 	while (piece[i] == '.')
@@ -123,13 +122,13 @@ char	*ft_new_piece(char *piece, int points, int blocks,int i)
 
 char	*ft_piece(char *piece)
 {
-	int points;
-	int i;
-	char *tmp;
+	int		points;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	points = ft_points(piece, 0, 0, 0);
-	piece = ft_new_piece(ft_strrev_fr(piece), points, 0);
+	piece = ft_new_piece(ft_strrev_fr(piece), points, 0, 0);
 	tmp = ft_strrev_fr(piece);
 	piece = tmp;
 	ft_strdel(&tmp);

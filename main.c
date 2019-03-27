@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 09:27:47 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 11:07:56 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,24 @@ void		ft_start(t_tetris *piece)
 	{
 		i++;
 		new = ft_new_map(i);
+		ft_final_map_fr(final_map);
 		final_map = new;
 	}
+	ft_print(final_map->y, final_map->sol);
 	ft_final_map_fr(final_map);
+}
+
+void		ft_print(int y, char **sol)
+{
+	int i;
+
+	i = 0;
+	while (i < y)
+	{
+		ft_putstr(sol[i]);
+		ft_putchar('\n');
+		i++;
+	}
 }
 
 int			main(int argc, char **argv)

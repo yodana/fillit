@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:12:52 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 02:01:34 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 11:13:19 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	int				ret;
 	t_list			*current;
-	
+
 	current = ft_lstcheck(&save, fd);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0 && BUFF_SIZE > 0 && fd >= 0
 			&& line != NULL)

@@ -6,51 +6,13 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 03:08:29 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 11:10:12 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-int		ft_point(char *piece)
-{
-	int i;
-
-	i = 0;
-	while (piece[i] != '#' || (piece[i] >= 65 && piece[i] <= 90))
-		i++;
-	return (i);
-}
-
-void	ft_calc_x_y(int points, int *y, int *x, int y_max)
-{
-	if (points > 0)
-		*y = *y + points - (5 - y_max);
-	if (((*y % y_max) == 0 && *y != 0) || *y > y_max - 1)
-	{
-		if (*y > y_max - 1)
-			*y = *y % y_max;
-		else
-			*y = 0;
-		*x = *x + 1;
-	}
-}
-
-void	ft_print(int y, char **sol)
-{
-	int i;
-
-	i = 0;
-	while (i < y)
-	{
-		printf("%s\n", sol[i]);
-		i++;
-	}
-	ft_putchar('\n');
-}
-
-int			ft_put_check(t_final_map *final_map, t_tetris *piece, int x, int y)
+int		ft_put_check(t_final_map *final_map, t_tetris *piece, int x, int y)
 {
 	int		i;
 	int		points;
@@ -139,12 +101,11 @@ char	**ft_remove_piece(t_final_map *final_map, t_tetris *piece, int x, int y)
 
 int		ft_resolv(t_final_map *final_map, t_tetris *piece)
 {
-	ft_print(final_map->y, final_map->sol);
-	if (piece == NULL)
-		return (1);
 	int x;
 	int y;
 
+	if (piece == NULL)
+		return (1);
 	x = 0;
 	y = 0;
 	while (x < final_map->y - piece->x_max + 1)
