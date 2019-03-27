@@ -6,18 +6,17 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 20:19:49 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/28 00:06:50 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 #include <stdlib.h>
 
-char	**ft_stock_map(char *argv, char *line, char **map)
+char			**ft_stock_map(char *argv, char *line, char **map)
 {
-	int		i;
-	int		fd;
+	int			i;
+	int			fd;
 
 	fd = open(argv, O_RDONLY);
 	i = 0;
@@ -42,7 +41,7 @@ char	**ft_stock_map(char *argv, char *line, char **map)
 	return (map);
 }
 
-t_tetris	*ft_add_piece(char **map, int count)
+t_tetris		*ft_add_piece(char **map, int count)
 {
 	int			i;
 	char		*tmp;
@@ -53,12 +52,11 @@ t_tetris	*ft_add_piece(char **map, int count)
 	tmp = ft_strnew(0);
 	while (map[i])
 	{
-		tmp = ft_strjoin_fr(tmp, map[i],  1);
+		tmp = ft_strjoin_fr(tmp, map[i], 1);
 		if ((i + 1) % 5 == 0)
 		{
 			(i == 4) ? piece = ft_new_tetris(tmp, count++)
 				: (new = ft_new_tetris(tmp, count++));
-			(new == NULL) ? piece = NULL : 0;
 			(i > 4 && piece != NULL) ? ft_tetrisadd(&piece, new) : 0;
 			tmp = ft_strnew(0);
 		}
@@ -66,14 +64,14 @@ t_tetris	*ft_add_piece(char **map, int count)
 	}
 	(i == 4) ? piece = ft_new_tetris(tmp, count++)
 		: (new = ft_new_tetris(tmp, count++));
-	(new == NULL) ? piece = NULL : 0;
 	(i > 4 && piece != NULL) ? ft_tetrisadd(&piece, new) : 0;
+	ft_strrdel(map);
 	return (piece);
 }
 
-void		ft_start(t_tetris *piece)
+void			ft_start(t_tetris *piece)
 {
-	int i;
+	int			i;
 	t_final_map *final_map;
 	t_final_map *new;
 
@@ -92,9 +90,9 @@ void		ft_start(t_tetris *piece)
 	ft_final_map_fr(final_map);
 }
 
-void		ft_print(int y, char **sol)
+void			ft_print(int y, char **sol)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (i < y)
@@ -105,11 +103,11 @@ void		ft_print(int y, char **sol)
 	}
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	char **map;
-	char *line;
-	t_tetris *piece;
+	char		**map;
+	char		*line;
+	t_tetris	*piece;
 
 	line = NULL;
 	map = NULL;
@@ -126,7 +124,6 @@ int			main(int argc, char **argv)
 			return (0);
 		ft_start(piece);
 		ft_piece_fr(piece);
-		ft_strrdel(map);
 	}
 	return (0);
 }

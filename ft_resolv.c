@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:58:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 11:10:12 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 23:37:51 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_put_check(t_final_map *final_map, t_tetris *piece, int x, int y)
 	tetris = piece->map;
 	points = 0;
 	i = 0;
-	if (sol[x][y - 1] && sol[x][y - 1] == '#')
+	if (y > 0 && sol[x][y - 1] && sol[x][y - 1] == '#')
 	{
 		while (tetris[i] != '#')
 			i++;
@@ -52,7 +52,7 @@ char	**ft_put_piece(t_final_map *final_map, t_tetris *piece, int x, int y)
 	i = 0;
 	points = 0;
 	sol = final_map->sol;
-	if (sol[x][y - 1] && sol[x][y - 1] == '#')
+	if (y > 0 && sol[x][y - 1] && sol[x][y - 1] == '#')
 	{
 		while (tetris[i] != '#')
 			i++;
@@ -81,7 +81,7 @@ char	**ft_remove_piece(t_final_map *final_map, t_tetris *piece, int x, int y)
 	i = 0;
 	points = 0;
 	tetris = piece->map;
-	if (sol[x][y - 1] && sol[x][y - 1] == '#')
+	if (y > 0 && sol[x][y - 1] && sol[x][y - 1] == '#')
 	{
 		while (tetris[i] != '#')
 			i++;

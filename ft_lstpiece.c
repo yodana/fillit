@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 20:20:03 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/27 23:43:32 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,17 @@ t_final_map	*ft_new_map(int side)
 
 t_tetris	*ft_new_tetris(char *map, int count)
 {
-	t_tetris *new;
+	t_tetris	*new;
+	char		*tmp;
 
 	if (!(new = (t_tetris*)malloc(sizeof(t_tetris))))
 		return (NULL);
 	new->x_max = ft_calc_x(map);
-	new->map = ft_strdup(ft_piece(map));
+	tmp = ft_piece(map);
+	new->map = ft_strdup(tmp);
 	new->y_max = ft_calc_y(new->map);
 	new->lettre = 65 + count;
 	new->next = NULL;
+	free(tmp);
 	return (new);
 }

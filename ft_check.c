@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/10 06:14:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 18:12:18 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/28 00:03:48 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ int			ft_block(int i, int j, char **map)
 	count = 0;
 	while (map[k])
 		k++;
+	k--;
 	if (j < 3 && map[i][j + 1] == '#')
 		count++;
 	if (j > 0 && map[i][j - 1] == '#')
 		count++;
-	if (i < k && (i != (k - 1)) && map[i + 1][j] == '#')
+	if (i < k && ((i + 2) % 5 != 0) && map[i + 1][j] == '#')
 		count++;
-	if (i > 0 && map[i - 1][j] == '#')
+	if (i > 0 && (i % 5 != 0) && map[i - 1][j] == '#')
 		count++;
 	return (count);
 }
