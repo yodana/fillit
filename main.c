@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 11:07:56 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 18:43:26 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,13 @@ int			main(int argc, char **argv)
 		ft_putendl("usage: ./fillit tetris_file");
 		return (0);
 	}
-	map = ft_stock_map(argv[1], line, map);
-	ft_check_line(map, 0, 0);
-	piece = ft_add_piece(map, 0);
-	ft_strrdel(map);
-	ft_start(piece);
-	ft_piece_fr(piece);
+	if ((map = ft_stock_map(argv[1], line, map)))
+	{
+		ft_check_line(map, 0, 0);
+		piece = ft_add_piece(map, 0);
+		ft_start(piece);
+		ft_piece_fr(piece);
+		ft_strrdel(map);
+	}
 	return (0);
 }

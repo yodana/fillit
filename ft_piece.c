@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 11:11:29 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 18:47:15 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*ft_new_piece(char *piece, int points, int blocks, int i)
 	j = 0;
 	while (piece[i] == '.')
 		i++;
-	new = (char*)malloc(sizeof(char) * ft_strlen(piece) - i + 1);
+	new = (char*)malloc(sizeof(char) * (ft_strlen(piece)));
 	while (blocks < 4)
 	{
 		if (piece[i] == '#')
