@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 18:43:26 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/27 19:59:21 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_tetris	*ft_add_piece(char **map, int count)
 				piece = ft_new_tetris(tmp, count++);
 			else
 			{
-				new = ft_new_tetris(tmp,count++);
+				new = ft_new_tetris(tmp, count++);
 				ft_tetrisadd(&piece, new);
 			}
 			tmp = ft_strnew(0);
