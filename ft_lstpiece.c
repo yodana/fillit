@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 23:43:32 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/28 22:25:36 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char		**ft_clean_map(int side, char **map)
 		return (NULL);
 	while (x < side)
 	{
-		map[x] = ft_strnew(side);
+		if (!(map[x] = ft_strnew(side)))
+			return (NULL);
 		while (y < side)
 		{
 			map[x][y] = '.';
@@ -79,7 +80,8 @@ t_final_map	*ft_new_map(int side)
 	new->next = NULL;
 	new->x = side;
 	new->y = side;
-	new->sol = ft_clean_map(side, new->sol);
+	if (!(new->sol = ft_clean_map(side, new->sol)))
+		return (NULL);
 	return (new);
 }
 

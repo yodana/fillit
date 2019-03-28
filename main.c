@@ -6,12 +6,11 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/28 00:06:50 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/28 22:27:06 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdlib.h>
 
 char			**ft_stock_map(char *argv, char *line, char **map)
 {
@@ -20,7 +19,7 @@ char			**ft_stock_map(char *argv, char *line, char **map)
 
 	fd = open(argv, O_RDONLY);
 	i = 0;
-	while (get_next_line(fd, &line))
+	while ((get_next_line(fd, &line)) > 0)
 	{
 		i++;
 		free(line);
@@ -30,7 +29,7 @@ char			**ft_stock_map(char *argv, char *line, char **map)
 		return (NULL);
 	i = 0;
 	fd = open(argv, O_RDONLY);
-	while (get_next_line(fd, &line))
+	while ((get_next_line(fd, &line)) > 0)
 	{
 		map[i] = ft_strdup(line);
 		free(line);
@@ -78,11 +77,13 @@ void			ft_start(t_tetris *piece)
 	i = 1;
 	while (ft_tetris_count(piece) * 4 > i * i)
 		i++;
-	final_map = ft_new_map(i);
+	if (!(final_map = ft_new_map(i)))
+		return ;
 	while (ft_resolv(final_map, piece) != 1)
 	{
 		i++;
-		new = ft_new_map(i);
+		if (!(new = ft_new_map(i)))
+			return ;
 		ft_final_map_fr(final_map);
 		final_map = new;
 	}

@@ -6,12 +6,11 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 16:16:45 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 22:13:49 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/03/28 11:08:24 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 int		ft_calc_x(char *piece)
 {
@@ -99,14 +98,13 @@ char	*ft_new_piece(char *piece, int points, int blocks, int i)
 	j = 0;
 	while (piece[i] == '.')
 		i++;
-	new = ft_strnew(ft_strlen(piece) - i + 1);
+	if (!(new = ft_strnew(ft_strlen(piece) - i + 1)))
+		return (NULL);
 	while (blocks < 4)
 	{
 		if (piece[i] == '#')
 			blocks++;
-		new[j] = piece[i];
-		j++;
-		i++;
+		new[j++] = piece[i++];
 	}
 	new[j] = piece[i];
 	while (points > 0)
@@ -128,7 +126,8 @@ char	*ft_piece(char *piece)
 
 	i = 0;
 	points = ft_points(piece, 0, 0, 0);
-	piece = ft_new_piece(ft_strrev_fr(piece), points, 0, 0);
+	if (!(piece = ft_new_piece(ft_strrev_fr(piece), points, 0, 0)))
+		return (NULL);
 	tmp2 = ft_strrev_fr(piece);
 	return (tmp2);
 }
