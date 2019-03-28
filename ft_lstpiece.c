@@ -6,13 +6,11 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:21:24 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/28 22:25:36 by yodana           ###   ########.fr       */
+/*   Updated: 2019/03/28 22:44:10 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-#include <stdio.h>
 
 void		ft_tetrisadd(t_tetris **piece, t_tetris *n)
 {
@@ -90,11 +88,14 @@ t_tetris	*ft_new_tetris(char *map, int count)
 	t_tetris	*new;
 	char		*tmp;
 
+	if (map == NULL)
+		return (NULL);
 	if (!(new = (t_tetris*)malloc(sizeof(t_tetris))))
 		return (NULL);
 	new->x_max = ft_calc_x(map);
 	tmp = ft_piece(map);
-	new->map = ft_strdup(tmp);
+	if (tmp == NULL || !(new->map = ft_strdup(tmp)))
+		return (NULL);
 	new->y_max = ft_calc_y(new->map);
 	new->lettre = 65 + count;
 	new->next = NULL;
