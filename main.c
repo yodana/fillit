@@ -6,33 +6,34 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/28 22:43:21 by yodana           ###   ########.fr       */
+/*   Updated: 2019/04/04 18:45:39 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-char			**ft_stock_map(char *argv, char *line, char **map)
+char			**ft_stock_map(char *arv, char *l, char **map, int i)
 {
-	int			i;
 	int			fd;
 
-	fd = open(argv, O_RDONLY);
-	i = 0;
-	while ((get_next_line(fd, &line)) > 0)
+	fd = open(arv, O_RDONLY);
+	(!ft_strcmp(arv, "/dev/zero")) ? ft_error() : 0;
+	while ((get_next_line(fd, &l)) > 0)
 	{
 		i++;
-		free(line);
+		(ft_check_gnl(l) == -1) ? ft_error() : 0;
+		free(l);
 	}
 	close(fd);
 	if (!(map = (char**)malloc(sizeof(char*) * (i + 1))))
 		return (NULL);
 	i = 0;
-	fd = open(argv, O_RDONLY);
-	while ((get_next_line(fd, &line)) > 0)
+	fd = open(arv, O_RDONLY);
+	while ((get_next_line(fd, &l)) > 0)
 	{
-		map[i] = ft_strdup(line);
-		free(line);
+		map[i] = ft_strdup(l);
+		free(l);
 		i++;
 	}
 	close(fd);
@@ -64,7 +65,6 @@ t_tetris		*ft_add_piece(char **map, int count)
 	(i == 4) ? piece = ft_new_tetris(tmp, count++)
 		: (new = ft_new_tetris(tmp, count++));
 	(i > 4 && piece != NULL) ? ft_tetrisadd(&piece, new) : 0;
-	ft_strrdel(map);
 	return (piece);
 }
 
@@ -117,14 +117,18 @@ int				main(int argc, char **argv)
 		ft_putendl("usage: ./fillit tetris_file");
 		return (0);
 	}
-	if ((map = ft_stock_map(argv[1], line, map)))
+	if ((map = ft_stock_map(argv[1], line, map, 0)))
 	{
 		ft_check_line(map, 0, 0);
 		piece = ft_add_piece(map, 0);
 		if (piece == NULL)
+		{
+			ft_piece_fr(piece);
 			return (0);
+		}
 		ft_start(piece);
 		ft_piece_fr(piece);
 	}
+	ft_strrdel(map);
 	return (0);
 }

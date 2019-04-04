@@ -6,11 +6,25 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 03:13:22 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/27 10:58:01 by yodana           ###   ########.fr       */
+/*   Updated: 2019/04/04 17:51:23 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int		ft_check_gnl(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '.' && line[i] != '#')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
 
 void	ft_final_map_fr(t_final_map *final_map)
 {

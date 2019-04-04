@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 15:26:16 by yodana            #+#    #+#             */
-/*   Updated: 2019/03/28 22:31:54 by yodana           ###   ########.fr       */
+/*   Updated: 2019/04/04 17:47:35 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void			ft_piece_fr(t_tetris *piece);
 void			ft_print(int y, char **sol);
 int				ft_point(char *piece);
 void			ft_calc_x_y(int points, int *y, int *x, int y_max);
+int				ft_check_gnl(char *line);
 
 #endif
