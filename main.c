@@ -6,19 +6,17 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/04/04 18:45:39 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:03:07 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char			**ft_stock_map(char *arv, char *l, char **map, int i)
 {
 	int			fd;
 
 	fd = open(arv, O_RDONLY);
-	(!ft_strcmp(arv, "/dev/zero")) ? ft_error() : 0;
 	while ((get_next_line(fd, &l)) > 0)
 	{
 		i++;
