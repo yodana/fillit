@@ -6,18 +6,20 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/04/12 14:47:38 by yodana           ###   ########.fr       */
+/*   Updated: 2019/04/12 18:35:16 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char			**ft_stock_map(char *arv, char *l, char **map, int i)
-{
-	int			fd;
+#include <stdio.h>
 
-	fd = open(arv, O_RDONLY);
-	while ((get_next_line(fd, &l)) > 0)
+char			**ft_stock_map(int fd, char **map, int i, char *argv)
+{
+	int			ret;
+	char		buf[5];
+	int			j;
+/*	while ((get_next_line(fd, &l)) > 0)
 	{
 		i++;
 		(ft_check_gnl(l) == -1) ? ft_error() : 0;
@@ -35,7 +37,36 @@ char			**ft_stock_map(char *arv, char *l, char **map, int i)
 		i++;
 	}
 	close(fd);
+	map[i] = NULL;*/
+//	i = ft_check_file(argv, 0);
+	(void)argv;
+	j = 0;
+	if (!(map = (char**)malloc(sizeof(char*) * (1000))))
+		return (NULL);
+	i = 0;
+	while ((ret = read(fd, buf, 1)) > 0)
+	{
+		buf[ret] = '\0';
+		if (buf[0] == '\n')
+		{
+			map[i][j] = '\0';
+			i++;
+			j = 0;
+		}
+		else
+		{
+			map[i][j] = buf[0];
+			j++;
+		}
+	}
+	i++;
 	map[i] = NULL;
+	i = 0;
+	while (map[i])
+	{
+		printf("map ==> %s\n", map[i]);
+		i++;
+	}
 	return (map);
 }
 
@@ -105,39 +136,19 @@ void			ft_print(int y, char **sol)
 int				main(int argc, char **argv)
 {
 	char		**map;
-	char		*line;
+	int			fd;
 	t_tetris	*piece;
 
-	line = NULL;
 	map = NULL;
-	int fd;
-	int ret;
-	char buf[5];
-	fd = open(argv[1],O_RDONLY);
-	ret = read(fd, buf, 5);
-	buf[ret] = '\0';
-	int i = 0;
-	while (buf[i])
-	{
-		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
-		{
-			close(fd);
-			ft_error();
-		}
-		i++;
-	}
-	close(fd);
-	if (argc != 2)
-	{
-		ft_putendl("usage: ./fillit tetris_file");
-		return (0);
-	}
-	if ((map = ft_stock_map(argv[1], line, map, 0)))
+	(argc != 2) ? ft_putendl("usage: ./fillit tetris_file") : 0;
+	((fd = open(argv[1], O_RDONLY)) < 0) ? ft_error() : 0;
+	if ((map = ft_stock_map(fd, map, 0, argv[1])) && argc == 1)
 	{
 		ft_check_line(map, 0, 0);
 		piece = ft_add_piece(map, 0);
 		if (piece == NULL)
 		{
+			close(fd);
 			ft_piece_fr(piece);
 			return (0);
 		}
@@ -145,5 +156,6 @@ int				main(int argc, char **argv)
 		ft_piece_fr(piece);
 	}
 	ft_strrdel(map);
+	close(fd);
 	return (0);
 }
