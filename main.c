@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/04/10 17:03:07 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:47:38 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,15 @@ int				main(int argc, char **argv)
 	line = NULL;
 	map = NULL;
 	int fd;
-
+	int ret;
 	char buf[5];
 	fd = open(argv[1],O_RDONLY);
-	read(fd, buf, 5);
+	ret = read(fd, buf, 5);
+	buf[ret] = '\0';
 	int i = 0;
-	while (i < 4)
+	while (buf[i])
 	{
-		if (buf[i] != '.' && buf[i] != '#')
+		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
 		{
 			close(fd);
 			ft_error();
