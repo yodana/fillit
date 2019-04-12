@@ -110,6 +110,22 @@ int				main(int argc, char **argv)
 
 	line = NULL;
 	map = NULL;
+	int fd;
+
+	char buf[5];
+	fd = open(argv[1],O_RDONLY);
+	read(fd, buf, 5);
+	int i = 0;
+	while (i < 4)
+	{
+		if (buf[i] != '.' && buf[i] != '#')
+		{
+			close(fd);
+			ft_error();
+		}
+		i++;
+	}
+	close(fd);
 	if (argc != 2)
 	{
 		ft_putendl("usage: ./fillit tetris_file");
