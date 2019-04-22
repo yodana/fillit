@@ -14,11 +14,11 @@
 
 #include <stdio.h>
 
-char			**ft_stock_map(int fd, char **map, int i, char *argv)
+char			**ft_stock_map(int fd, char **map, int i, int j)
 {
 	int			ret;
-	char		buf[5];
-	int			j;
+	char		buf[400];
+	int			k;
 /*	while ((get_next_line(fd, &l)) > 0)
 	{
 		i++;
@@ -39,34 +39,39 @@ char			**ft_stock_map(int fd, char **map, int i, char *argv)
 	close(fd);
 	map[i] = NULL;*/
 //	i = ft_check_file(argv, 0);
-	(void)argv;
-	j = 0;
-	if (!(map = (char**)malloc(sizeof(char*) * (1000))))
-		return (NULL);
+	k = 0;
 	i = 0;
-	while ((ret = read(fd, buf, 1)) > 0)
+	while ((ret = read(fd, buf, 400)) > 0)
 	{
 		buf[ret] = '\0';
-		if (buf[0] == '\n')
+		while (buf[j])
 		{
-			map[i][j] = '\0';
-			i++;
-			j = 0;
+			if (buf[j] == '\n')
+				k++;
+			j++;
 		}
-		else
+		if (!(map = (char**)malloc(sizeof(char*) * (k + 2))))
+			return (NULL);
+		j = 0;
+		k = 0;
+		while (buf[j])
 		{
-			map[i][j] = buf[0];
+			if (buf[j] == '\n' && buf[j - 1] == '\n')
+			{
+				map[i] = ft_strsub(buf, k, 0);
+				k = k + 1;
+				i++;
+			}
+			else if (buf[j] == '\n' || buf[j] == '\0')
+			{
+				map[i] = ft_strsub(buf, k, 4);
+				i++;
+				k = j + 1;
+			}
 			j++;
 		}
 	}
-	i++;
 	map[i] = NULL;
-	i = 0;
-	while (map[i])
-	{
-		printf("map ==> %s\n", map[i]);
-		i++;
-	}
 	return (map);
 }
 
@@ -142,7 +147,7 @@ int				main(int argc, char **argv)
 	map = NULL;
 	(argc != 2) ? ft_putendl("usage: ./fillit tetris_file") : 0;
 	((fd = open(argv[1], O_RDONLY)) < 0) ? ft_error() : 0;
-	if ((map = ft_stock_map(fd, map, 0, argv[1])) && argc == 1)
+	if ((map = ft_stock_map(fd, map, 0, 0)) && argc == 2)
 	{
 		ft_check_line(map, 0, 0);
 		piece = ft_add_piece(map, 0);
