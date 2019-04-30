@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 15:26:16 by yodana            #+#    #+#             */
-/*   Updated: 2019/04/12 18:28:25 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:42:12 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 
 void			ft_error();
+void			ft_error_f(int fd);
 void			ft_check_line(char **map, int i, int j);
 char			*ft_piece(char *piece);
 int				ft_calc_y(char *piece);
@@ -51,7 +52,5 @@ void			ft_piece_fr(t_tetris *piece);
 void			ft_print(int y, char **sol);
 int				ft_point(char *piece);
 void			ft_calc_x_y(int points, int *y, int *x, int y_max);
-int				ft_check_l(char *line);
-int				ft_check_file(char *argv, int ret);
 
 #endif
