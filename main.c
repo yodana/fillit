@@ -26,7 +26,7 @@ char			**ft_stock_map(char *argv, char **map, int i, int ret)
 	}
 	close(fd);
 	if (!(map = (char**)malloc(sizeof(char*) * (i + 1))))
-			return (NULL);
+		return (NULL);
 	i = 0;
 	map[i] = ft_strnew(0);
 	((fd = open(argv, O_RDONLY)) < 0) ? ft_error() : 0;
@@ -111,6 +111,8 @@ int				main(int argc, char **argv)
 
 	map = NULL;
 	(argc != 2) ? ft_putendl("usage: ./fillit tetris_file") : 0;
+	if (argc != 2)
+		return (0);
 	if ((map = ft_stock_map(argv[1], map, 0, 0)))
 	{
 		ft_check_line(map, 0, 0);
