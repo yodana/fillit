@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/04/30 16:59:30 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:12:35 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char			**ft_stock_map(char *argv, char **map, int i, int ret)
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
 		buf[ret] = '\0';
-		(buf[0] != '\n' && buf[0] != '#' && buf[0] != '.')
-			? ft_error() : (buf[0] == '\n') ? i++ : 0;
+		(buf[0] != '\n' && buf[0] != '#' && buf[0] != '.') ? ft_error() : 0;
+		(buf[0] == '\n') ? i++ : 0;
 	}
 	close(fd);
 	if (!(map = (char**)malloc(sizeof(char*) * (i + 1))))
-			return (NULL);
+		return (NULL);
 	i = 0;
 	map[i] = ft_strnew(0);
 	((fd = open(argv, O_RDONLY)) < 0) ? ft_error() : 0;
@@ -110,7 +110,11 @@ int				main(int argc, char **argv)
 	t_tetris	*piece;
 
 	map = NULL;
-	(argc != 2) ? ft_putendl("usage: ./fillit tetris_file") : 0;
+	if (argc != 2)
+	{
+		ft_putendl("usage: ./fillit tetris_file");
+		return (0);
+	}
 	if ((map = ft_stock_map(argv[1], map, 0, 0)))
 	{
 		ft_check_line(map, 0, 0);
