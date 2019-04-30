@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:10:26 by yodana            #+#    #+#             */
-/*   Updated: 2019/04/30 17:12:35 by arbocqui         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:42:30 by arbocqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char			**ft_stock_map(char *argv, char **map, int i, int ret)
 	int			fd;
 	char		buf[2];
 
-	((fd = open(argv, O_RDONLY)) < 0) ? ft_error() : 0;
+	((fd = open(argv, O_RDONLY)) < 0) ? ft_error_f(fd) : 0;
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
 		buf[ret] = '\0';
-		(buf[0] != '\n' && buf[0] != '#' && buf[0] != '.') ? ft_error() : 0;
+		(buf[0] != '\n' && buf[0] != '#' && buf[0] != '.') ? ft_error_f(fd) : 0;
 		(buf[0] == '\n') ? i++ : 0;
 	}
 	close(fd);
@@ -29,7 +29,7 @@ char			**ft_stock_map(char *argv, char **map, int i, int ret)
 		return (NULL);
 	i = 0;
 	map[i] = ft_strnew(0);
-	((fd = open(argv, O_RDONLY)) < 0) ? ft_error() : 0;
+	((fd = open(argv, O_RDONLY)) < 0) ? ft_error_f(fd) : 0;
 	while ((ret = read(fd, buf, 1)) > 0)
 	{
 		buf[ret] = '\0';
